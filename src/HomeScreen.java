@@ -60,6 +60,7 @@ public class HomeScreen extends JFrame implements ActionListener{
         browse = new JButton();
         browse.setName("Browse Songs");
         browse.setLabel("Browse Songs");
+        browse.setAlignmentX(Component.CENTER_ALIGNMENT);
         System.out.println("Browse Songs");
         browse.setPreferredSize(new Dimension(100,100));
         browse.addActionListener(this);
@@ -71,6 +72,7 @@ public class HomeScreen extends JFrame implements ActionListener{
         search.setName("Search Songs");
         search.setLabel("Search Songs");
         System.out.println("Search Songs");
+        search.setAlignmentX(Component.CENTER_ALIGNMENT);
         search.setPreferredSize(new Dimension(100, 100));
         search.addActionListener(this);
         pane.add(search);
@@ -91,6 +93,7 @@ public class HomeScreen extends JFrame implements ActionListener{
         payment = new JButton();
         payment.setName("Payment");
         payment.setLabel("Payment");
+        payment.setAlignmentX(Component.CENTER_ALIGNMENT);
         System.out.println("Payment");
         payment.setPreferredSize(new Dimension(100, 100));
         payment.addActionListener(this);
