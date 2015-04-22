@@ -38,6 +38,7 @@ public class OtherFeatures extends JFrame implements ActionListener{
     public void addButton(String name, Dimension size, JPanel pane) {
         JButton button = new JButton(name);
         button.setPreferredSize(size);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(this);
         pane.add(button);
     }
@@ -45,6 +46,7 @@ public class OtherFeatures extends JFrame implements ActionListener{
     public void addToggleButton(String name, Dimension size, JPanel pane) {
         JToggleButton button = new JToggleButton(name);
         button.setPreferredSize(size);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(this);
         pane.add(button);
     }
