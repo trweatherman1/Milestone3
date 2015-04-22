@@ -30,6 +30,7 @@ public class SearchScreen extends JFrame implements ActionListener {
         setUpCenter();
 
         pane.add(center, BorderLayout.CENTER);
+        pane.add(text1, BorderLayout.NORTH);
 
 
         pane.add(keyboard, BorderLayout.SOUTH);
@@ -48,8 +49,8 @@ public class SearchScreen extends JFrame implements ActionListener {
         search = new JButton();
         search.setName("Search Songs");
         search.setLabel("Search Songs");
-        //System.out.println("Browse Songs");
-        search.setPreferredSize(new Dimension(400, 200));
+        search.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //search.setPreferredSize(new Dimension(30, 100));
         search.addActionListener(this);
         pane.add(search);
     }
@@ -59,8 +60,8 @@ public class SearchScreen extends JFrame implements ActionListener {
         back = new JButton();
         back.setName("Back");
         back.setLabel("Back");
-        System.out.println("Back");
-        back.setPreferredSize(new Dimension(100, 100));
+        back.setAlignmentX(Component.CENTER_ALIGNMENT);
+        back.setPreferredSize(new Dimension(100, 50));
         back.addActionListener(this);
         pane.add(back);
     }
@@ -69,10 +70,11 @@ public class SearchScreen extends JFrame implements ActionListener {
         center = new JPanel();
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
         title.setText("Search Songs");
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
         center.add(title);
         center.add(Box.createGlue());
-        text1.setPreferredSize(new Dimension(500, 300));
-        center.add(text1);
+        //text1.setPreferredSize(new Dimension(1, 1));
+        //center.add(text1);
         center.add(Box.createGlue());
         this.searchSongsButton(center);
         center.add(Box.createGlue());

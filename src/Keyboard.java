@@ -2,14 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Keyboard extends JPanel implements KeyListener {
+public class Keyboard extends JPanel implements MouseListener {
 
     String first[] = {"~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "+", "BackSpace"};
     String second[] = {"Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"};
     String third[] = {"Caps", "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "\"", "Enter"};
-    String fourth[] = {"Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "?", " ^"};
-    String fifth[] = {"     ", "<", "\\/", ">"};
+    String fourth[] = {"Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "?"};
+    String fifth[] = {"     "};
 
     JButton firstRow[];
     JButton secondRow[];
@@ -24,20 +26,6 @@ public class Keyboard extends JPanel implements KeyListener {
 
 
         initWidgets();
-    }
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 
     private void initWidgets() {
@@ -116,4 +104,28 @@ public class Keyboard extends JPanel implements KeyListener {
     }
 
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }

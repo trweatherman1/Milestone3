@@ -67,7 +67,7 @@ public class Payment extends JFrame implements ActionListener{
         quarter.setName("Add Quarter");
         quarter.setLabel("Add Quarter");
         System.out.println("Add Quarter");
-        quarter.setPreferredSize(new Dimension(100, 100));
+        quarter.setPreferredSize(new Dimension(200, 100));
         quarter.addActionListener(this);
         pane.add(quarter);
 
@@ -78,7 +78,7 @@ public class Payment extends JFrame implements ActionListener{
         dollar.setName("Add Dollar");
         dollar.setLabel("Add Dollar");
         System.out.println("Add Dollar");
-        dollar.setPreferredSize(new Dimension(100, 100));
+        dollar.setPreferredSize(new Dimension(200, 100));
         dollar.addActionListener(this);
         pane.add(dollar);
     }
