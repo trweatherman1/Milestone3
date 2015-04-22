@@ -19,6 +19,7 @@ public class SearchScreen extends JFrame implements ActionListener {
 
 
 
+
     public SearchScreen() {
         pane = new JPanel();
         text1 = new JTextField();
@@ -34,7 +35,8 @@ public class SearchScreen extends JFrame implements ActionListener {
         pane.add(keyboard, BorderLayout.SOUTH);
 
 
-        this.setSize(1400, 600);
+        this.setSize(1100, 600);
+        //this.setPreferredSize(new Dimension(1400,600));
         this.setContentPane(pane);
         this.setTitle("Search Screen");
         this.setVisible(true);
