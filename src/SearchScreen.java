@@ -25,6 +25,9 @@ public class SearchScreen extends JFrame implements ActionListener {
         text1 = new JTextField();
         title = new JLabel();
 
+        text1.setPreferredSize(new Dimension(600, 50));
+        text1.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         pane.setLayout(new BorderLayout());
 
         setUpCenter();
