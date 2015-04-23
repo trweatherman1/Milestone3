@@ -40,7 +40,7 @@ public class UpdateLibrary extends JFrame implements ActionListener{
     public void addButton(String name, Dimension size, JPanel pane) {
         JButton button = new JButton(name);
         button.setPreferredSize(size);
-
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(this);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.setMaximumSize(new Dimension(300,300));

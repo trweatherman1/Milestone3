@@ -36,7 +36,7 @@ public class AdminMenu extends JFrame implements ActionListener{
 
         this.setContentPane(pane);
         this.setPreferredSize(new Dimension(800,600));//Size(1000, 1000);
-        this.setTitle("Payment Screen");
+        this.setTitle("Admin Menu");
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
