@@ -63,6 +63,8 @@ public class HomeScreen extends JFrame implements ActionListener{
         browse.setAlignmentX(Component.CENTER_ALIGNMENT);
         System.out.println("Browse Songs");
         browse.setPreferredSize(new Dimension(100,100));
+        browse.setMaximumSize(new Dimension(200,300));
+
         browse.addActionListener(this);
         pane.add(browse);
     }
@@ -74,17 +76,21 @@ public class HomeScreen extends JFrame implements ActionListener{
         System.out.println("Search Songs");
         search.setAlignmentX(Component.CENTER_ALIGNMENT);
         search.setPreferredSize(new Dimension(100, 100));
+        search.setMaximumSize(new Dimension(200, 300));
+
         search.addActionListener(this);
         pane.add(search);
     }
 
     public void adminButton(JPanel pane){
         admin = new JButton();
-        admin.setName("Admin");
-        admin.setLabel("Admin");
+        admin.setName("");
+        admin.setLabel("");
         System.out.println("Admin");
         admin.setPreferredSize(new Dimension(100, 100));
+        admin.setMinimumSize(new Dimension(200,300));
         admin.addActionListener(this);
+        admin.setOpaque(true);
         //admin.setVisible(false);
         pane.add(admin);
     }
@@ -96,6 +102,8 @@ public class HomeScreen extends JFrame implements ActionListener{
         payment.setAlignmentX(Component.CENTER_ALIGNMENT);
         System.out.println("Payment");
         payment.setPreferredSize(new Dimension(100, 100));
+       // payment.setMinimumSize(new Dimension(200, 300));
+        payment.setMaximumSize(new Dimension(200,300));
         payment.addActionListener(this);
         //admin.setVisible(false);
         pane.add(payment);

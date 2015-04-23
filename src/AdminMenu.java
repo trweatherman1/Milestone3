@@ -40,9 +40,6 @@ public class AdminMenu extends JFrame implements ActionListener{
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
-
-
-
     }
 
     public void setPriceButton(JPanel pane){
@@ -51,6 +48,8 @@ public class AdminMenu extends JFrame implements ActionListener{
         setPrice.setLabel("Set Price");
         System.out.println("Set Price");
         setPrice.setPreferredSize(new Dimension(100, 100));
+        setPrice.setMaximumSize(new Dimension(200,300));
+        setPrice.setAlignmentX(CENTER_ALIGNMENT);
         setPrice.addActionListener(this);
         pane.add(setPrice);
     }
@@ -61,6 +60,8 @@ public class AdminMenu extends JFrame implements ActionListener{
         usageStats.setLabel("Usage Statistics");
         System.out.println("Usage Statistics");
         usageStats.setPreferredSize(new Dimension(100, 100));
+        usageStats.setMaximumSize(new Dimension(200,300));
+        usageStats.setAlignmentX(CENTER_ALIGNMENT);
         usageStats.addActionListener(this);
         pane.add(usageStats);
     }
@@ -71,7 +72,9 @@ public class AdminMenu extends JFrame implements ActionListener{
         updateLibrary.setLabel("Update Library");
         System.out.println("Update Library");
         updateLibrary.setPreferredSize(new Dimension(100, 100));
+        updateLibrary.setMaximumSize(new Dimension(200,300));
         updateLibrary.addActionListener(this);
+        updateLibrary.setAlignmentX(CENTER_ALIGNMENT);
         pane.add(updateLibrary);
     }
 
@@ -81,6 +84,8 @@ public class AdminMenu extends JFrame implements ActionListener{
         other.setLabel("Other Features");
         System.out.println("Other Features");
         other.setPreferredSize(new Dimension(100, 100));
+        other.setMaximumSize(new Dimension(200,300));
+        other.setAlignmentX(CENTER_ALIGNMENT);
         other.addActionListener(this);
         pane.add(other);
     }
@@ -89,17 +94,25 @@ public class AdminMenu extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = ((JButton)e.getSource()).getActionCommand();
+        String[] args = new String[0];
         if(command.equals("Set Price")){
             System.out.println("Set Price");
         }
         else if(command.equals("Usage Statistics")){
             System.out.println("Usage Stats");
+
         }
         else if(command.equals("Update Library")){
             System.out.println("Update Library");
+            UpdateLibrary.main(args);
+            pane.setVisible(false);
+            this.dispose();
         }
         else if(command.equals("Other Features")){
             System.out.println("Other Features");
+            OtherFeatures.main(args);
+            pane.setVisible(false);
+            this.dispose();
         }
     }
 

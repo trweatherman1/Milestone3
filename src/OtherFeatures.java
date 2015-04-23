@@ -8,8 +8,9 @@ import java.awt.event.ActionListener;
  */
 public class OtherFeatures extends JFrame implements ActionListener{
 
+        JPanel pane;
     public OtherFeatures() {
-        JPanel pane = new JPanel(new BorderLayout());
+        pane = new JPanel(new BorderLayout());
         addCenter(pane);
         addNorth(pane);
         display(pane);
@@ -39,6 +40,8 @@ public class OtherFeatures extends JFrame implements ActionListener{
         JButton button = new JButton(name);
         button.setPreferredSize(size);
         button.addActionListener(this);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setMaximumSize(new Dimension(300,300));
         pane.add(button);
     }
 
@@ -46,6 +49,8 @@ public class OtherFeatures extends JFrame implements ActionListener{
         JToggleButton button = new JToggleButton(name);
         button.setPreferredSize(size);
         button.addActionListener(this);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setMaximumSize(new Dimension(300,300));
         pane.add(button);
     }
 
@@ -61,12 +66,17 @@ public class OtherFeatures extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
+        String[] args = new String[0];
         if (command.equals("Attract Mode"))
             System.out.println("attract mode");
         else if (command.equals("Screen Saver"))
             System.out.println("Screen Saver");
-        else if (command.equals("Back"))
+        else if (command.equals("Back")) {
             System.out.println("back");
+            AdminMenu.main(args);
+            pane.setVisible(false);
+            this.dispose();
+        }
     }
 
     public static void main(String args[]) { new OtherFeatures(); }
