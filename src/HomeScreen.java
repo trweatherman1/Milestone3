@@ -9,8 +9,7 @@ import java.awt.event.ActionListener;
 public class HomeScreen extends DefaultScreen implements ActionListener{
 
     JPanel pane;
-    JPanel defp;
-    JPanel south;
+    //JPanel south;
     JButton browse;
     JButton search;
     JButton admin;
@@ -18,8 +17,7 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
 
     public HomeScreen(){
         pane = new JPanel();
-        defp = new JPanel();
-        south = new JPanel();
+        //south = new JPanel();
 
         //pane.setLayout(new BorderLayout());
         
@@ -33,14 +31,14 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         defp.add(Box.createGlue());
 
 
-        south.setLayout(new BoxLayout(south, BoxLayout.X_AXIS));
-        this.adminButton(south);
-        south.add(Box.createGlue());
+        //south.setLayout(new BoxLayout(south, BoxLayout.X_AXIS));
+        //this.adminButton(south);
+        //south.add(Box.createGlue());
 
 
 
-        pane.add(defp, BorderLayout.CENTER);
-        pane.add(south, BorderLayout.SOUTH);
+        //pane.add(defp, BorderLayout.CENTER);
+        //pane.add(south, BorderLayout.SOUTH);
 
         browse.setActionCommand("Browse Songs");
         search.setActionCommand("Search Songs");
@@ -127,22 +125,22 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         else if(command.equals("Search Songs")){
             System.out.println("search");
             SearchScreen.main(args);
-            pane.setVisible(false);
-            this.dispose();
+            defp.setVisible(false);
+            dispose();
         }
         else if(command.equals("Admin")){
             System.out.println("admin");
 
             AdminLogin.main(args);
-            pane.setVisible(false);
-            this.dispose();
+            defp.setVisible(false);
+            dispose();
         }
         else if(command.equals("Payment")){
             System.out.println("Payment");
 
             Payment.main(args);
-            pane.setVisible(false);
-            this.dispose();
+            defp.setVisible(false);
+            dispose();
         }
     }
 
