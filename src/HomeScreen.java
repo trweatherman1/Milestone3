@@ -8,19 +8,14 @@ import java.awt.event.ActionListener;
  */
 public class HomeScreen extends DefaultScreen implements ActionListener{
 
-    JPanel pane;
-    //JPanel south;
     JButton browse;
     JButton search;
     JButton admin;
     JButton payment;
 
     public HomeScreen(){
-        pane = new JPanel();
-        //south = new JPanel();
-
-        //pane.setLayout(new BorderLayout());
-        
+        defp.setVisible(true);
+        defp.setLayout(new FlowLayout());
         defp.setLayout(new BoxLayout(defp, BoxLayout.Y_AXIS));
         defp.add(Box.createGlue());
         this.browseSongsButton(defp);
@@ -32,23 +27,12 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         this.adminButton(defp);
         defp.add(Box.createGlue());
 
-
-        //south.setLayout(new BoxLayout(south, BoxLayout.X_AXIS));
-        //this.adminButton(south);
-        //south.add(Box.createGlue());
-
-
-
-        //pane.add(defp, BorderLayout.CENTER);
-        //pane.add(south, BorderLayout.SOUTH);
-
         browse.setActionCommand("Browse Songs");
         search.setActionCommand("Search Songs");
         admin.setActionCommand("Admin");
         payment.setActionCommand("Payment");
 
-        this.setContentPane(pane);
-        this.setPreferredSize(new Dimension(1000, 700));//Size(1000, 1000);
+        this.setPreferredSize(new Dimension(900, 600));//Size(1000, 1000);
         this.setTitle("Main Menu");
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,11 +47,8 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         //System.out.println("Browse Songs");
         browse.setPreferredSize(new Dimension(100, 100));
         browse.setMaximumSize(new Dimension(200, 300));
-
         browse.addActionListener(this);
         pane.add(browse);
-        browse.setForeground(Color.BLACK);
-        browse.setBackground(Color.CYAN);
         browse.setFocusPainted(false);
     }
 
@@ -82,23 +63,17 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
 
         search.addActionListener(this);
         pane.add(search);
-        search.setBackground(Color.CYAN);
-        search.setForeground(Color.BLACK);
     }
 
     public void adminButton(JPanel pane){
         admin = new JButton();
         admin.setName("Admin");
         admin.setLabel("Admin");
-        //System.out.println("Admin");
+        admin.setAlignmentX(Component.CENTER_ALIGNMENT);
         admin.setPreferredSize(new Dimension(100, 100));
-        admin.setMinimumSize(new Dimension(200, 300));
+        admin.setMaximumSize(new Dimension(200, 300));
         admin.addActionListener(this);
-        //admin.setOpaque(true);
-        //admin.setVisible(false);
         pane.add(admin);
-        admin.setBackground(Color.CYAN);
-        admin.setForeground(Color.BLACK);
     }
 
     public void paymentButton(JPanel pane){
@@ -106,15 +81,10 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         payment.setName("Payment");
         payment.setLabel("Payment");
         payment.setAlignmentX(Component.CENTER_ALIGNMENT);
-        //System.out.println("Payment");
         payment.setPreferredSize(new Dimension(100, 100));
-        payment.setMinimumSize(new Dimension(200, 300));
-        //payment.setMaximumSize(new Dimension(200, 300));
+        payment.setMaximumSize(new Dimension(200, 300));
         payment.addActionListener(this);
-        //admin.setVisible(false);
         pane.add(payment);
-        payment.setBackground(Color.CYAN);
-        payment.setForeground(Color.BLACK);
     }
 
     @Override
