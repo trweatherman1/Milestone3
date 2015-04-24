@@ -29,6 +29,8 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         defp.add(Box.createGlue());
         this.paymentButton(defp);
         defp.add(Box.createGlue());
+        this.adminButton(defp);
+        defp.add(Box.createGlue());
 
 
         //south.setLayout(new BoxLayout(south, BoxLayout.X_AXIS));
@@ -46,7 +48,7 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         payment.setActionCommand("Payment");
 
         this.setContentPane(pane);
-        this.setPreferredSize(new Dimension(800, 600));//Size(1000, 1000);
+        this.setPreferredSize(new Dimension(1000, 700));//Size(1000, 1000);
         this.setTitle("Main Menu");
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +60,7 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         browse.setName("Browse Songs");
         browse.setLabel("Browse Songs");
         browse.setAlignmentX(Component.CENTER_ALIGNMENT);
-        System.out.println("Browse Songs");
+        //System.out.println("Browse Songs");
         browse.setPreferredSize(new Dimension(100, 100));
         browse.setMaximumSize(new Dimension(200, 300));
 
@@ -73,7 +75,7 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         search = new JButton();
         search.setName("Search Songs");
         search.setLabel("Search Songs");
-        System.out.println("Search Songs");
+        //System.out.println("Search Songs");
         search.setAlignmentX(Component.CENTER_ALIGNMENT);
         search.setPreferredSize(new Dimension(100, 100));
         search.setMaximumSize(new Dimension(200, 300));
@@ -86,16 +88,16 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
 
     public void adminButton(JPanel pane){
         admin = new JButton();
-        admin.setName("");
-        admin.setLabel("");
-        System.out.println("Admin");
+        admin.setName("Admin");
+        admin.setLabel("Admin");
+        //System.out.println("Admin");
         admin.setPreferredSize(new Dimension(100, 100));
         admin.setMinimumSize(new Dimension(200, 300));
         admin.addActionListener(this);
-        admin.setOpaque(true);
+        //admin.setOpaque(true);
         //admin.setVisible(false);
         pane.add(admin);
-        admin.setBackground(Color.BLUE);
+        admin.setBackground(Color.CYAN);
         admin.setForeground(Color.BLACK);
     }
 
@@ -104,10 +106,10 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         payment.setName("Payment");
         payment.setLabel("Payment");
         payment.setAlignmentX(Component.CENTER_ALIGNMENT);
-        System.out.println("Payment");
+        //System.out.println("Payment");
         payment.setPreferredSize(new Dimension(100, 100));
-       // payment.setMinimumSize(new Dimension(200, 300));
-        payment.setMaximumSize(new Dimension(200, 300));
+        payment.setMinimumSize(new Dimension(200, 300));
+        //payment.setMaximumSize(new Dimension(200, 300));
         payment.addActionListener(this);
         //admin.setVisible(false);
         pane.add(payment);
@@ -146,6 +148,6 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
 
     public static void main(String[] args){
 
-        HomeScreen menu = new HomeScreen();
+        HomeScreen home = new HomeScreen();
     }
 }
