@@ -95,9 +95,9 @@ public class AdminLogin extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        String command = e.getActionCommand();
+        Object command = e.getSource();
         String[] args = new String[0];
-        if(command.equals("Back")){
+        if(command == back){
             HomeScreen.main(args);
             pane.setVisible(false);
             this.dispose();

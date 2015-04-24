@@ -31,7 +31,7 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
 
     final int APP_WIDTH = 800;/**The application width**/
 
-    final int FIELD_COUNT = 8;/**The album of fields in this GUI item**/
+    final int FIELD_COUNT = 5;/**The album of fields in this GUI item**/
 
     private boolean selectionState = false;/**The selection state of this row.**/
     boolean isHeader = false;
@@ -97,11 +97,10 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
         this.add(Box.createGlue());
 
         //Set the text of the input fields
-        items.get(0).setEditable(false);
-        items.get(1).setText(song);
-        items.get(2).setText(artist);
-        items.get(3).setText(album);
-        items.get(4).setText(genre);
+        items.get(0).setText(song);
+        items.get(1).setText(artist);
+        items.get(2).setText(album);
+        items.get(3).setText(genre);
 
 
         this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
@@ -224,7 +223,7 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
-        cnt = new Controller();
+        cnt = Controller.getInstance();
     }
 
     @Override

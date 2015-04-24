@@ -33,7 +33,7 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
     public  SongDirectory(){
         super();
 
-        recordController = new Controller();
+        recordController = Controller.getInstance();
 
 
         this.setSize(800,600);
@@ -51,7 +51,7 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
         this.setVisible(true);
 
 
-        redrraw(true);
+        redraw(true);
     }//=================================================================================================================
 
     //==================================================================================================================
@@ -80,10 +80,10 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
     //==================================================================================================================
     /**
      * Redraw the table of data.
-     * @boolean loadAll When true the table data is reloaded in its entirity.
+     * @boolean loadAll When true the table data is reloaded in its entirety.
      */
     //==================================================================================================================
-    public void redrraw(boolean loadAll){
+    public void redraw(boolean loadAll){
 
         directoryListing.removeAll();//Clear components.
         if(loadAll)
@@ -176,7 +176,7 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
             }
         }
 
-        this.redrraw(true);
+        this.redraw(true);
     }//=================================================================================================================
 
     //==================================================================================================================
@@ -203,11 +203,11 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
      */
     //==================================================================================================================
     public void search(String terms){
-        recordController.selectNameAndNumber("lastName LIKE '" + terms + "%'",true );
+        recordController.selectNameAndNumber("artist LIKE '" + terms + "%'",true );
 
-        recordController.selectNameAndNumber("firstName LIKE '" + terms + "%'",false );
+        recordController.selectNameAndNumber("song LIKE '" + terms + "%'",false );
 
-        this.redrraw(false);
+        this.redraw(false);
     }//=================================================================================================================
 
     //==================================================================================================================
@@ -219,7 +219,7 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
     public void dialogAddRecord(SongRecordModel r) {
         this.recordController.addRecord(r);
 
-        this.redrraw(true);
+        this.redraw(true);
     }//=================================================================================================================
 
 

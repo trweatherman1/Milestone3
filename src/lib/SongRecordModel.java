@@ -83,8 +83,7 @@ public class SongRecordModel {
      */
     //=========================================================================
     public String toString() {
-        return song = song + ", " + artist + "," + album + ", " +
-                genre;
+        return song = song + ", " + artist + ", " + album + ", " + genre;
     }//=======================================================================
 
     /*

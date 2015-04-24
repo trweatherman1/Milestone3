@@ -31,12 +31,15 @@ public class Controller {
 
     Connection conn = null; /**The database connection **/
 
+    /**The singleton instance of the controller.**/
+    private static Controller instance;
+
     //========================================================================
     /**
      * A no argument constructor for the controller.
      */
     //========================================================================
-    public Controller(){
+    private Controller(){
         records = new ArrayList<SongRecordModel>();
 
 
@@ -47,6 +50,18 @@ public class Controller {
 
     }//=======================================================================
 
+    //========================================================================
+
+    /**
+     * Get the singleton instance of this object.
+     * @return
+     */
+    //=========================================================================
+    public static Controller getInstance(){
+        if(instance == null)
+            instance = new Controller();
+        return instance;
+    }//========================================================================
     //========================================================================
     /**
      * Add a record t the list and insert into the database.
@@ -227,7 +242,6 @@ public class Controller {
             //Use the create syntax to create a table.
 
             s.execute("CREATE TABLE dir ( "
-                    +  "id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                     + " song VARCHAR(20) NOT NULL ,"
                     + " artist VARCHAR(20) NOT NULL ,"
                     + " album VARCHAR(20) NOT NULL, "
@@ -260,7 +274,7 @@ public class Controller {
         try
         {
             PreparedStatement psInsert;
-            psInsert= conn.prepareStatement(  "insert into dir(song, artist, album, genre) values ( ?, ?, ?, ?, ?, ?)");
+            psInsert= conn.prepareStatement(  "insert into dir(song, artist, album, genre) values ( ?, ?, ?, ?)");
 
             psInsert.setString(1, tr.getSong());
             psInsert.setString(2, tr.getArtist());

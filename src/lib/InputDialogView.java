@@ -1,11 +1,9 @@
 package lib;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.util.ArrayList;
 
 //######################################################################################################################
@@ -51,7 +49,7 @@ public class InputDialogView extends JDialog implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        for (int i =0;i < headings.length;i++){
+        for (int i = 0;i < headings.length;i++){
 
             labels[i] = new JLabel(headings[i]);
             textFields[i] = new JTextField(CHARACTER_WIDTH);
@@ -78,8 +76,8 @@ public class InputDialogView extends JDialog implements ActionListener {
         }
 
 
-        Date date  = new Date( System.currentTimeMillis());
-        textFields[textFields.length-1].setText(date.toString());
+        //Date date  = new Date( System.currentTimeMillis());
+        //textFields[textFields.length-1].setText(date.toString());
 
 
         addButtonPanel();
