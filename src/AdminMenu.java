@@ -96,20 +96,20 @@ public class AdminMenu extends JFrame implements ActionListener{
         String command = ((JButton)e.getSource()).getActionCommand();
         String[] args = new String[0];
         if(command.equals("Set Price")){
-            System.out.println("Set Price");
+            //System.out.println("Set Price");
         }
         else if(command.equals("Usage Statistics")){
-            System.out.println("Usage Stats");
+            //System.out.println("Usage Stats");
 
         }
         else if(command.equals("Update Library")){
-            System.out.println("Update Library");
+            //System.out.println("Update Library");
             UpdateLibrary.main(args);
             pane.setVisible(false);
             this.dispose();
         }
         else if(command.equals("Other Features")){
-            System.out.println("Other Features");
+            //System.out.println("Other Features");
             OtherFeatures.main(args);
             pane.setVisible(false);
             this.dispose();
