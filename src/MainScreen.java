@@ -34,6 +34,9 @@ public class MainScreen extends DefaultScreen implements ActionListener{
         });
         defp.add(button, BorderLayout.CENTER);
         //button.setBackground(Color.BLUE);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
         Font font = new Font("Serif", Font.PLAIN, 76);
         button.setFont(font);
         button.setForeground(Color.BLACK);

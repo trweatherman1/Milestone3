@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 /**
  * Created by Trent on 4/18/2015.
  */
-public class HomeScreen extends JFrame implements ActionListener{
+public class HomeScreen extends DefaultScreen implements ActionListener{
 
     JPanel pane;
-    JPanel center;
+    JPanel defp;
     JPanel south;
     JButton browse;
     JButton search;
@@ -18,20 +18,19 @@ public class HomeScreen extends JFrame implements ActionListener{
 
     public HomeScreen(){
         pane = new JPanel();
-        center = new JPanel();
+        defp = new JPanel();
         south = new JPanel();
 
-        pane.setLayout(new BorderLayout());
-
-
-        center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
-        center.add(Box.createGlue());
-        this.browseSongsButton(center);
-        center.add(Box.createGlue());
-        this.searchSongsButton(center);
-        center.add(Box.createGlue());
-        this.paymentButton(center);
-        center.add(Box.createGlue());
+        //pane.setLayout(new BorderLayout());
+        
+        defp.setLayout(new BoxLayout(defp, BoxLayout.Y_AXIS));
+        defp.add(Box.createGlue());
+        this.browseSongsButton(defp);
+        defp.add(Box.createGlue());
+        this.searchSongsButton(defp);
+        defp.add(Box.createGlue());
+        this.paymentButton(defp);
+        defp.add(Box.createGlue());
 
 
         south.setLayout(new BoxLayout(south, BoxLayout.X_AXIS));
@@ -40,7 +39,7 @@ public class HomeScreen extends JFrame implements ActionListener{
 
 
 
-        pane.add(center, BorderLayout.CENTER);
+        pane.add(defp, BorderLayout.CENTER);
         pane.add(south, BorderLayout.SOUTH);
 
         browse.setActionCommand("Browse Songs");
@@ -62,11 +61,14 @@ public class HomeScreen extends JFrame implements ActionListener{
         browse.setLabel("Browse Songs");
         browse.setAlignmentX(Component.CENTER_ALIGNMENT);
         System.out.println("Browse Songs");
-        browse.setPreferredSize(new Dimension(100,100));
-        browse.setMaximumSize(new Dimension(200,300));
+        browse.setPreferredSize(new Dimension(100, 100));
+        browse.setMaximumSize(new Dimension(200, 300));
 
         browse.addActionListener(this);
         pane.add(browse);
+        browse.setForeground(Color.BLACK);
+        browse.setBackground(Color.CYAN);
+        browse.setFocusPainted(false);
     }
 
     public void searchSongsButton(JPanel pane){
@@ -80,6 +82,8 @@ public class HomeScreen extends JFrame implements ActionListener{
 
         search.addActionListener(this);
         pane.add(search);
+        search.setBackground(Color.CYAN);
+        search.setForeground(Color.BLACK);
     }
 
     public void adminButton(JPanel pane){
@@ -88,11 +92,13 @@ public class HomeScreen extends JFrame implements ActionListener{
         admin.setLabel("");
         System.out.println("Admin");
         admin.setPreferredSize(new Dimension(100, 100));
-        admin.setMinimumSize(new Dimension(200,300));
+        admin.setMinimumSize(new Dimension(200, 300));
         admin.addActionListener(this);
         admin.setOpaque(true);
         //admin.setVisible(false);
         pane.add(admin);
+        admin.setBackground(Color.BLUE);
+        admin.setForeground(Color.BLACK);
     }
 
     public void paymentButton(JPanel pane){
@@ -103,10 +109,12 @@ public class HomeScreen extends JFrame implements ActionListener{
         System.out.println("Payment");
         payment.setPreferredSize(new Dimension(100, 100));
        // payment.setMinimumSize(new Dimension(200, 300));
-        payment.setMaximumSize(new Dimension(200,300));
+        payment.setMaximumSize(new Dimension(200, 300));
         payment.addActionListener(this);
         //admin.setVisible(false);
         pane.add(payment);
+        payment.setBackground(Color.CYAN);
+        payment.setForeground(Color.BLACK);
     }
 
     @Override

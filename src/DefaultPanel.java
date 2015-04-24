@@ -12,8 +12,8 @@ public class DefaultPanel extends JPanel {
     }
 
     @Override
-    public void paintComponents(Graphics g) {
-        super.paintComponents(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         Color color1 = Color.CYAN;
         Color color2 = Color.GREEN;
@@ -24,14 +24,24 @@ public class DefaultPanel extends JPanel {
         g2d.fillRect(0, 0, w, h);
     }
 
-    public static void main(String[] args) {
+    private void display(){
         JFrame frame = new JFrame();
-        DefaultPanel dp = new DefaultPanel();
-        frame.add(dp);
+        frame.add(this);
         frame.setVisible(true);
         frame.setSize(900, 600);
+        Dimension dim = new Dimension(900, 600);
+        frame.setPreferredSize(dim);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new DefaultPanel().display();
+            }
+        });
     }
 
 }

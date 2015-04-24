@@ -30,7 +30,7 @@ public class DefaultScreen extends JFrame{
         label.setFont(new Font("Courier", Font.BOLD, 36));
         defp.add(label, BorderLayout.NORTH);
         defp.setVisible(true);
-        //panel.setBackground(Color.BLUE);
+        //defp.setBackground(Color.BLUE);
         this.pack();
     }
 

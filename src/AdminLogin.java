@@ -29,6 +29,7 @@ public class AdminLogin extends JFrame implements ActionListener {
         setupButtons(con, pane, submit, user, password, back);
         
         this.setContentPane(pane);
+        pane.setBackground(Color.CYAN);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();

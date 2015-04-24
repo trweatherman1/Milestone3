@@ -48,6 +48,7 @@ public class Payment extends JFrame implements ActionListener{
         south.add(Box.createGlue());
         this.backButton(south);
         south.add(Box.createGlue());
+        south.setBackground(Color.CYAN);
 
 
         total = 0.00;

@@ -85,6 +85,7 @@ public class SearchScreen extends JFrame implements ActionListener {
         center.add(Box.createGlue());
 
         back.setActionCommand("Back");
+        center.setBackground(Color.CYAN);
     }
 
 
