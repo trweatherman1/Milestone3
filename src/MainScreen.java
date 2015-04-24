@@ -21,8 +21,7 @@ public class MainScreen extends DefaultScreen implements ActionListener{
         mainscreen.go();
     }
     public void go() {
-        //super.go();
-        DefaultScreen defs = new DefaultScreen();
+        super.go();
         JButton button = new JButton("Touch Anywhere To Start");
         button.addActionListener(new ActionListener() {
             @Override
@@ -33,7 +32,7 @@ public class MainScreen extends DefaultScreen implements ActionListener{
                 dispose();
             }
         });
-        defs.add(button, BorderLayout.CENTER);
+        defp.add(button, BorderLayout.CENTER);
         //button.setBackground(Color.BLUE);
         Font font = new Font("Serif", Font.PLAIN, 76);
         button.setFont(font);
