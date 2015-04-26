@@ -97,7 +97,7 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
 
         Object command = e.getSource();
         String[] args = new String[0];
-        if(command == back){
+        if(command.equals("back")){
             HomeScreen.main(args);
             pane.setVisible(false);
             this.dispose();

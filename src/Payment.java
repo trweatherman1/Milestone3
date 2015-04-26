@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Trent on 4/18/2015.
  */
-public class Payment extends JFrame implements ActionListener{
+public class Payment extends DefaultScreen implements ActionListener{
     JPanel pane;
     JPanel center;
     JPanel south;
@@ -24,6 +24,7 @@ public class Payment extends JFrame implements ActionListener{
         south = new JPanel();
         //north = new JPanel();
         text = new JTextField();
+        defp.add(pane);
         text.setPreferredSize(new Dimension(150, 30));
         pane.setLayout(new BorderLayout());
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
@@ -53,9 +54,10 @@ public class Payment extends JFrame implements ActionListener{
 
         total = 0.00;
         //text = total;
-
-        this.setContentPane(pane);
-        this.setPreferredSize(new Dimension(800, 600));
+        pane.setOpaque(false);
+        center.setOpaque(false);
+        south.setOpaque(false);
+        this.setPreferredSize(new Dimension(900, 600));
         this.setTitle("Payment Screen");
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
