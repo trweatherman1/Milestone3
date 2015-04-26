@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Nicholas on 4/20/2015.
  */
-public class SearchScreen extends JFrame implements ActionListener {
+public class SearchScreen extends DefaultScreen implements ActionListener {
 
 
     JPanel pane;
@@ -24,6 +24,8 @@ public class SearchScreen extends JFrame implements ActionListener {
         pane = new JPanel();
         text1 = new JTextField();
         title = new JLabel();
+        defp.add(pane);
+        pane.setOpaque(false);
 
         text1.setPreferredSize(new Dimension(600, 50));
         text1.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -35,13 +37,10 @@ public class SearchScreen extends JFrame implements ActionListener {
         pane.add(center, BorderLayout.CENTER);
         pane.add(text1, BorderLayout.NORTH);
 
-
         pane.add(keyboard, BorderLayout.SOUTH);
 
 
-        this.setSize(1100, 600);
-        //this.setPreferredSize(new Dimension(1400,600));
-        this.setContentPane(pane);
+        this.setSize(900, 600);
         this.setTitle("Search Screen");
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +70,7 @@ public class SearchScreen extends JFrame implements ActionListener {
 
     private void setUpCenter() {
         center = new JPanel();
+        center.setOpaque(false);
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
         title.setText("Search Songs");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -85,7 +85,6 @@ public class SearchScreen extends JFrame implements ActionListener {
         center.add(Box.createGlue());
 
         back.setActionCommand("Back");
-        center.setBackground(Color.CYAN);
     }
 
 

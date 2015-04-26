@@ -6,13 +6,17 @@ import java.awt.event.ActionListener;
 /**
  * Created by Trent on 4/20/2015.
  */
-public class AdminMenu extends JFrame implements ActionListener{
+public class AdminMenu extends DefaultScreen implements ActionListener{
     JPanel pane = new JPanel();
     JPanel center = new JPanel();
     JButton setPrice, usageStats, updateLibrary, other;
 
     public AdminMenu(){
+        super();
+        pane.setOpaque(false);
+        defp.add(pane);
         pane.setLayout(new BorderLayout());
+        center.setOpaque(false);
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
 
         pane.add(center, BorderLayout.CENTER);
@@ -34,8 +38,7 @@ public class AdminMenu extends JFrame implements ActionListener{
 
 
 
-        this.setContentPane(pane);
-        this.setPreferredSize(new Dimension(800,600));//Size(1000, 1000);
+        this.setPreferredSize(new Dimension(900,600));//Size(1000, 1000);
         this.setTitle("Admin Menu");
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -6,30 +6,30 @@ import java.awt.event.ActionListener;
 /**
  * Created by Trent on 4/20/2015.
  */
-public class AdminLogin extends JFrame implements ActionListener {
+public class AdminLogin extends DefaultScreen implements ActionListener {
 
     JPanel pane;
     JButton submit;
     JButton back;
     JTextField user, password;
+
     public AdminLogin(){
 
-        this.setPreferredSize(new Dimension(800, 600));
+        super();
+        this.setPreferredSize(new Dimension(900, 600));
         this.setTitle("Admin Login");
         this.setVisible(true);
 
         pane = new JPanel();
+        defp.add(pane, BorderLayout.CENTER);
+        pane.setOpaque(false);
         pane.setLayout(new GridBagLayout());
         submit = null;
         user = null;
         password = null;
         back = null;
         GridBagConstraints con = new GridBagConstraints();
-        //back.setActionCommand("Back");
         setupButtons(con, pane, submit, user, password, back);
-        
-        this.setContentPane(pane);
-        pane.setBackground(Color.CYAN);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();

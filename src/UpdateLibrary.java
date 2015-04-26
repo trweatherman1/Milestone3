@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by Jameson on 4/21/2015.
@@ -137,31 +141,6 @@ public class UpdateLibrary extends JFrame implements ActionListener{
         panel.add(p2, BorderLayout.SOUTH);
         dialog.setVisible(true);
     }
-
-    /*
-    private void loadDriver() {
-        //Try to connect to driver
-        try {
-            Class.forName(driver).newInstance();
-            System.out.println("Loaded the appropriate driver");
-        }
-        //Fail catches.
-        catch (ClassNotFoundException cnfe) {
-            System.err.println("\nUnable to load the JDBC driver " + driver);
-            System.err.println("Please check your CLASSPATH.");
-            cnfe.printStackTrace(System.err);
-        } catch (InstantiationException ie) {
-            System.err.println(
-                    "\nUnable to instantiate the JDBC driver " + driver);
-            ie.printStackTrace(System.err);
-        } catch (IllegalAccessException iae) {
-            System.err.println(
-                    "\nNot allowed to access the JDBC driver " + driver);
-            iae.printStackTrace(System.err);
-        }
-    }//end loadDriver
-    */
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
