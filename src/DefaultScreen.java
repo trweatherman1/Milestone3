@@ -12,6 +12,7 @@ public class DefaultScreen extends JFrame{
         this.setSize(900, 500);
         Dimension dimension = new Dimension(900, 600);
         this.setPreferredSize(dimension);
+        this.setResizable(false);
         this.setVisible(true);
         this.go();
     }

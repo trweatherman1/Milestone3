@@ -4,10 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Jameson on 4/22/2015.
+ * Created by Jameson on 4/21/2015.
  */
 public class UpdateLibrary extends JFrame implements ActionListener{
-        JPanel pane;
+
+        private JPanel pane;
+        private JDialog dialog;
+
     public UpdateLibrary() {
         pane = new JPanel(new BorderLayout());
         addCenter(pane);
@@ -43,7 +46,7 @@ public class UpdateLibrary extends JFrame implements ActionListener{
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(this);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        button.setMaximumSize(new Dimension(300,300));
+        button.setMaximumSize(new Dimension(300, 300));
         pane.add(button);
     }
 
@@ -56,19 +59,127 @@ public class UpdateLibrary extends JFrame implements ActionListener{
         this.pack();
     }
 
+    public void makeDialog(ActionEvent e){
+        dialog = new JDialog();
+        JPanel panel = new JPanel();
+        JPanel p = new JPanel();
+        JPanel p2 = new JPanel();
+        Font font = new Font(null, Font.ITALIC, 12);
+
+        panel.setLayout(new BorderLayout());
+        p.setLayout(new FlowLayout());
+        p2.setLayout(new FlowLayout());
+
+        dialog.setSize(350, 200);
+        dialog.setPreferredSize(new Dimension(350, 200));
+        dialog.setResizable(false);
+        dialog.setLocationRelativeTo((JButton) e.getSource());
+
+        JLabel label = new JLabel("Song: ");
+        label.setPreferredSize(new Dimension(55, 21));
+        p.add(label);
+        JTextField tf = new JTextField("Enter Song");
+        tf.setPreferredSize(new Dimension(270, 21));
+        tf.setFont(font);
+        p.add(tf);
+        label = new JLabel("Artist: ");
+        label.setPreferredSize(new Dimension(55, 21));
+        p.add(label);
+        tf = new JTextField("Enter Artist");
+        tf.setPreferredSize(new Dimension(270, 21));
+        tf.setFont(font);
+        p.add(tf);
+        label = new JLabel("Album: ");
+        label.setPreferredSize(new Dimension(55, 21));
+        p.add(label);
+        tf = new JTextField("Enter Album");
+        tf.setPreferredSize(new Dimension(270, 21));
+        tf.setFont(font);
+        p.add(tf);
+        label = new JLabel("Genre: ");
+        label.setPreferredSize(new Dimension(55, 21));
+        p.add(label);
+        tf = new JTextField("Enter Genre");
+        tf.setPreferredSize(new Dimension(270, 21));
+        tf.setFont(font);
+        p.add(tf);
+        label = new JLabel("Path: ");
+        label.setPreferredSize(new Dimension(55, 21));
+        p.add(label);
+        tf = new JTextField("Enter File Path");
+        tf.setPreferredSize(new Dimension(270, 21));
+        tf.setFont(font);
+        p.add(tf);
+
+        JButton button2 = new JButton("Submit");
+        button2.setForeground(Color.BLACK);
+        button2.setFocusPainted(false);
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        p2.add(button2);
+        button2 = new JButton("Back");
+        button2.setForeground(Color.BLACK);
+        button2.setFocusPainted(false);
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        });
+        p2.add(button2);
+
+        dialog.add(panel);
+        panel.add(p, BorderLayout.CENTER);
+        panel.add(p2, BorderLayout.SOUTH);
+        dialog.setVisible(true);
+    }
+
+    /*
+    private void loadDriver() {
+        //Try to connect to driver
+        try {
+            Class.forName(driver).newInstance();
+            System.out.println("Loaded the appropriate driver");
+        }
+        //Fail catches.
+        catch (ClassNotFoundException cnfe) {
+            System.err.println("\nUnable to load the JDBC driver " + driver);
+            System.err.println("Please check your CLASSPATH.");
+            cnfe.printStackTrace(System.err);
+        } catch (InstantiationException ie) {
+            System.err.println(
+                    "\nUnable to instantiate the JDBC driver " + driver);
+            ie.printStackTrace(System.err);
+        } catch (IllegalAccessException iae) {
+            System.err.println(
+                    "\nNot allowed to access the JDBC driver " + driver);
+            iae.printStackTrace(System.err);
+        }
+    }//end loadDriver
+    */
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = ((JButton)e.getSource()).getActionCommand();
         String[] args = new String[0];
-        if (command.equals("Add Songs"))
+        if (command.equals("Add Songs")) {
             System.out.println("add songs");
-        else if (command.equals("Remove Songs"))
+            this.makeDialog(e);
+        }
+        else if (command.equals("Remove Songs")) {
             System.out.println("remove songs");
-        else if (command.equals("Back"))
+        }
+        else if (command.equals("Back")) {
             System.out.println("back");
             AdminMenu.main(args);
             pane.setVisible(false);
             this.dispose();
+        }
     }
 
     public static void main(String args[]) { new UpdateLibrary(); }
