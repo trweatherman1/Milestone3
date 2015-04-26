@@ -27,11 +27,8 @@ public class MainScreen extends DefaultScreen implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                getContentPane().removeAll();
-                HomeScreen hs = new HomeScreen();
-                getContentPane().add(hs);
-                validate();
-                setVisible(true);
+                String[] args = new  String[0];
+                HomeScreen.main(args);
             }
         });
         defp.add(button, BorderLayout.CENTER);

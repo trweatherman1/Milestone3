@@ -80,6 +80,7 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
 
         back = new JButton("Back");
         back.setActionCommand("Back");
+        back.addActionListener(this);
         con.fill = GridBagConstraints.HORIZONTAL;
         con.weightx = .25;
         con.gridx = 1;
@@ -95,9 +96,9 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        Object command = e.getSource();
+        Object command = ((JButton)e.getSource()).getActionCommand();
         String[] args = new String[0];
-        if(command.equals("back")){
+        if(command.equals("Back")){
             HomeScreen.main(args);
             pane.setVisible(false);
             this.dispose();
