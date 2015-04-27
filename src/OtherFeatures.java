@@ -8,7 +8,9 @@ import java.awt.event.ActionListener;
  */
 public class OtherFeatures extends DefaultScreen implements ActionListener{
 
-        JPanel pane;
+    JPanel pane;
+
+
     public OtherFeatures() {
         pane = new JPanel(new BorderLayout());
         pane.setOpaque(false);
