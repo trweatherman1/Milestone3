@@ -32,7 +32,7 @@ public class MainScreen extends DefaultScreen implements ActionListener{
                 HomeScreen.main(args);
             }
         });
-        button.setPreferredSize(new Dimension(900, 600));
+        button.setPreferredSize(new Dimension(800, 600));
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
