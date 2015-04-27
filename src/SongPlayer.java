@@ -9,13 +9,15 @@ import java.net.URL;
  * Created by Jameson on 4/27/2015.
  */
 public class SongPlayer extends Application {
+    /*
     public static void main(String[] args) {
         launch(args);
     }
+    */
 
     @Override
     public void start(Stage primaryStage) {
-        final URL resource = getClass().getResource("");
+        final URL resource = getClass().getResource("Last One Alive.mp3");
         final Media media = new Media(resource.toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();

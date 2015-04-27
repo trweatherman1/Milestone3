@@ -76,8 +76,6 @@ public class SearchScreen extends DefaultScreen implements ActionListener {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         center.add(title);
         center.add(Box.createGlue());
-        //text1.setPreferredSize(new Dimension(1, 1));
-        //center.add(text1);
         center.add(Box.createGlue());
         this.searchSongsButton(center);
         center.add(Box.createGlue());
