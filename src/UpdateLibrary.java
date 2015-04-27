@@ -1,3 +1,5 @@
+import lib.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,20 +12,28 @@ import java.util.Properties;
 /**
  * Created by Jameson on 4/21/2015.
  */
-public class UpdateLibrary extends JFrame implements ActionListener{
+public class UpdateLibrary extends DefaultScreen implements ActionListener{
 
         private JPanel pane;
         private JDialog dialog;
+        private JTextField tf;
+        private JTextField tf2;
+        private JTextField tf3;
+        private JTextField tf4;
+        private JTextField tf5;
 
     public UpdateLibrary() {
         pane = new JPanel(new BorderLayout());
+        pane.setOpaque(false);
         addCenter(pane);
         addNorth(pane);
         display(pane);
+        defp.add(pane);
     }
 
     public void addCenter(JPanel pane) {
         JPanel center = new JPanel();
+        center.setOpaque(false);
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
         center.add(Box.createGlue());
         addButton("Add Songs", new Dimension(100, 100), center);
@@ -36,7 +46,7 @@ public class UpdateLibrary extends JFrame implements ActionListener{
     public void addNorth(JPanel pane) {
         JPanel north = new JPanel();
         north.setLayout(new BoxLayout(north, BoxLayout.X_AXIS));
-
+        north.setOpaque(false);
         addButton("Back", new Dimension(100, 100), north);
         north.add(Box.createGlue());
         north.add(new JLabel("Update Library"));
@@ -55,7 +65,6 @@ public class UpdateLibrary extends JFrame implements ActionListener{
     }
 
     public void display(JPanel pane) {
-        this.setContentPane(pane);
         this.setPreferredSize(new Dimension(800, 600));
         this.setTitle("Update Library");
         this.setVisible(true);
@@ -82,38 +91,38 @@ public class UpdateLibrary extends JFrame implements ActionListener{
         JLabel label = new JLabel("Song: ");
         label.setPreferredSize(new Dimension(55, 21));
         p.add(label);
-        JTextField tf = new JTextField("Enter Song");
+        tf = new JTextField("Enter Song");
         tf.setPreferredSize(new Dimension(270, 21));
         tf.setFont(font);
         p.add(tf);
         label = new JLabel("Artist: ");
         label.setPreferredSize(new Dimension(55, 21));
         p.add(label);
-        tf = new JTextField("Enter Artist");
-        tf.setPreferredSize(new Dimension(270, 21));
-        tf.setFont(font);
-        p.add(tf);
+        tf2 = new JTextField("Enter Artist");
+        tf2.setPreferredSize(new Dimension(270, 21));
+        tf2.setFont(font);
+        p.add(tf2);
         label = new JLabel("Album: ");
         label.setPreferredSize(new Dimension(55, 21));
         p.add(label);
-        tf = new JTextField("Enter Album");
-        tf.setPreferredSize(new Dimension(270, 21));
-        tf.setFont(font);
-        p.add(tf);
+        tf3 = new JTextField("Enter Album");
+        tf3.setPreferredSize(new Dimension(270, 21));
+        tf3.setFont(font);
+        p.add(tf3);
         label = new JLabel("Genre: ");
         label.setPreferredSize(new Dimension(55, 21));
         p.add(label);
-        tf = new JTextField("Enter Genre");
-        tf.setPreferredSize(new Dimension(270, 21));
-        tf.setFont(font);
-        p.add(tf);
+        tf4 = new JTextField("Enter Genre");
+        tf4.setPreferredSize(new Dimension(270, 21));
+        tf4.setFont(font);
+        p.add(tf4);
         label = new JLabel("Path: ");
         label.setPreferredSize(new Dimension(55, 21));
         p.add(label);
-        tf = new JTextField("Enter File Path");
-        tf.setPreferredSize(new Dimension(270, 21));
-        tf.setFont(font);
-        p.add(tf);
+        tf5 = new JTextField("Enter File Path");
+        tf5.setPreferredSize(new Dimension(270, 21));
+        tf5.setFont(font);
+        p.add(tf5);
 
         JButton button2 = new JButton("Submit");
         button2.setForeground(Color.BLACK);
@@ -147,7 +156,8 @@ public class UpdateLibrary extends JFrame implements ActionListener{
         String command = ((JButton)e.getSource()).getActionCommand();
         String[] args = new String[0];
         if (command.equals("Add Songs")) {
-            System.out.println("add songs");
+            Controller c = Controller.getInstance();
+            c.connect();
             this.makeDialog(e);
         }
         else if (command.equals("Remove Songs")) {

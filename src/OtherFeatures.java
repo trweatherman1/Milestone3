@@ -6,18 +6,21 @@ import java.awt.event.ActionListener;
 /**
  * Created by Jameson on 4/22/2015.
  */
-public class OtherFeatures extends JFrame implements ActionListener{
+public class OtherFeatures extends DefaultScreen implements ActionListener{
 
         JPanel pane;
     public OtherFeatures() {
         pane = new JPanel(new BorderLayout());
+        pane.setOpaque(false);
         addCenter(pane);
         addNorth(pane);
         display(pane);
+        defp.add(pane);
     }
 
     public void addCenter(JPanel pane) {
         JPanel center = new JPanel();
+        center.setOpaque(false);
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
         center.add(Box.createGlue());
         addToggleButton("Attract Mode", new Dimension(100, 100), center);
@@ -28,6 +31,7 @@ public class OtherFeatures extends JFrame implements ActionListener{
 
     public void addNorth(JPanel pane) {
         JPanel north = new JPanel();
+        north.setOpaque(false);
         north.setLayout(new BoxLayout(north, BoxLayout.X_AXIS));
         addButton("Back", new Dimension(100, 100), north);
         north.add(Box.createGlue());
@@ -57,7 +61,6 @@ public class OtherFeatures extends JFrame implements ActionListener{
     }
 
     public void display(JPanel pane) {
-        this.setContentPane(pane);
         this.setPreferredSize(new Dimension(800, 600));
         this.setTitle("Update Library");
         this.setVisible(true);
