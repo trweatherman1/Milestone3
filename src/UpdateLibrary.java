@@ -21,6 +21,7 @@ public class UpdateLibrary extends DefaultScreen implements ActionListener{
         private JTextField tf3;
         private JTextField tf4;
         private JTextField tf5;
+        private Controller c;
 
     public UpdateLibrary() {
         pane = new JPanel(new BorderLayout());
@@ -79,6 +80,9 @@ public class UpdateLibrary extends DefaultScreen implements ActionListener{
         JPanel p2 = new JPanel();
         Font font = new Font(null, Font.ITALIC, 12);
 
+        c = Controller.getInstance();
+        c.connect();
+
         panel.setLayout(new BorderLayout());
         p.setLayout(new FlowLayout());
         p2.setLayout(new FlowLayout());
@@ -130,7 +134,7 @@ public class UpdateLibrary extends DefaultScreen implements ActionListener{
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                c.addRecord(tf.getText(), tf2.getText(), tf3.getText(), tf4.getText());
             }
         });
         p2.add(button2);
@@ -156,8 +160,6 @@ public class UpdateLibrary extends DefaultScreen implements ActionListener{
         String command = ((JButton)e.getSource()).getActionCommand();
         String[] args = new String[0];
         if (command.equals("Add Songs")) {
-            Controller c = Controller.getInstance();
-            c.connect();
             this.makeDialog(e);
         }
         else if (command.equals("Remove Songs")) {

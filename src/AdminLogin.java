@@ -72,6 +72,7 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
         pane.add(password, con);
 
         submit = new JButton("Submit");
+        submit.addActionListener(this);
         con.fill = GridBagConstraints.HORIZONTAL;
         con.weightx = .25;
         con.gridx = 0;
@@ -102,6 +103,13 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
             HomeScreen.main(args);
             pane.setVisible(false);
             this.dispose();
+        }
+        if(command.equals("Submit")){
+            if(user.getText().equals("admin") && password.getText().equals("admin")){
+                AdminMenu.main(args);
+                pane.setVisible(false);
+                this.dispose();
+            }
         }
     }
 
