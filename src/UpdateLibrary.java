@@ -20,7 +20,6 @@ public class UpdateLibrary extends DefaultScreen implements ActionListener{
         private JTextField tf2;
         private JTextField tf3;
         private JTextField tf4;
-        private JTextField tf5;
         private Controller c;
 
     public UpdateLibrary() {
@@ -66,7 +65,7 @@ public class UpdateLibrary extends DefaultScreen implements ActionListener{
     }
 
     public void display(JPanel pane) {
-        this.setPreferredSize(new Dimension(800, 600));
+        this.setPreferredSize(new Dimension(900, 600));
         this.setTitle("Update Library");
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,10 +122,6 @@ public class UpdateLibrary extends DefaultScreen implements ActionListener{
         label = new JLabel("Path: ");
         label.setPreferredSize(new Dimension(55, 21));
         p.add(label);
-        tf5 = new JTextField("Enter File Path");
-        tf5.setPreferredSize(new Dimension(270, 21));
-        tf5.setFont(font);
-        p.add(tf5);
 
         JButton button2 = new JButton("Submit");
         button2.setForeground(Color.BLACK);

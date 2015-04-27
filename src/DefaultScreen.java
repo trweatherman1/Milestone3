@@ -9,7 +9,7 @@ public class DefaultScreen extends JFrame{
     public DefaultPanel defp;
 
     public DefaultScreen(){
-        this.setSize(900, 500);
+        this.setSize(900, 600);
         Dimension dimension = new Dimension(900, 600);
         this.setPreferredSize(dimension);
         this.setResizable(false);
