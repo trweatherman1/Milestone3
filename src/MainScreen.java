@@ -19,25 +19,25 @@ public class MainScreen extends DefaultScreen implements ActionListener{
     public static void main(String[] args){
         MainScreen mainscreen = new MainScreen();
         mainscreen.go();
+        mainscreen.setVisible(true);
     }
     public void go() {
-        super.go();
-        JButton button = new JButton("Touch Anywhere To Start");
+        ImgPanel img = new ImgPanel();
+        JButton button = new JButton();
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                String[] args = new  String[0];
+                String[] args = new String[0];
                 HomeScreen.main(args);
             }
         });
-        defp.add(button, BorderLayout.CENTER);
+        button.setPreferredSize(new Dimension(900, 600));
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
-        Font font = new Font("Serif", Font.PLAIN, 76);
-        button.setFont(font);
-        button.setForeground(Color.BLACK);
+        img.add(button);
+        add(img);
         button.setFocusPainted(false);
     }
 

@@ -21,4 +21,13 @@ public class ImgPanel extends JPanel {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, null);
     }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        frame.add(new ImgPanel());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(900, 600);
+        frame.setResizable(false);
+        frame.setVisible(true);
+    }
 }
