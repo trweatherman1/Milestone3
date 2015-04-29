@@ -9,7 +9,8 @@ import java.awt.event.ActionListener;
 public class AdminMenu extends DefaultScreen implements ActionListener{
     JPanel pane = new JPanel();
     JPanel center = new JPanel();
-    JButton setPrice, usageStats, updateLibrary, other;
+    JPanel west = new JPanel();
+    JButton setPrice, usageStats, updateLibrary, other, logout;
 
     public AdminMenu(){
         super();
@@ -18,8 +19,11 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         pane.setLayout(new BorderLayout());
         center.setOpaque(false);
         center.setLayout(new BoxLayout(center, BoxLayout.Y_AXIS));
+        west.setOpaque(false);
+        west.setLayout(new FlowLayout());
 
         pane.add(center, BorderLayout.CENTER);
+        pane.add(west, BorderLayout.WEST);
 
         center.add(Box.createGlue());
         this.setPriceButton(center);
@@ -30,6 +34,8 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         center.add(Box.createGlue());
         this.otherButton(center);
         center.add(Box.createGlue());
+
+        this.logoutButton(west);
 
         setPrice.setActionCommand("Set Price");
         usageStats.setActionCommand("Usage Statistics");
@@ -91,6 +97,16 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         pane.add(other);
     }
 
+    public void logoutButton(JPanel pane){
+        logout = new JButton();
+        logout.setName("Logout");
+        logout.setLabel("Logout");
+        logout.setFocusPainted(false);
+        logout.setPreferredSize(new Dimension(100, 100));
+        logout.addActionListener(this);
+        pane.add(logout);
+
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -112,6 +128,11 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         else if(command.equals("Other Features")){
             //System.out.println("Other Features");
             OtherFeatures.main(args);
+            pane.setVisible(false);
+            this.dispose();
+        }
+        else if(command.equals("Logout")){
+            HomeScreen.main(args);
             pane.setVisible(false);
             this.dispose();
         }
