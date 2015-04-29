@@ -7,6 +7,7 @@ import java.awt.*;
 public class BrowseSongs {
 
     String[] columnNames = {"Song", "Artist", "Album", "Genre"};
+    /*
     Object[][] data = {
             {"Dayum Baby Dayum", "Florida Georgia Line", "This is How We Roll", "Country"},
             {"Downfall of us All", "A Day To Remember", "Homesick", "Punk"},
@@ -15,6 +16,7 @@ public class BrowseSongs {
 
 
     };
+    */
 
     JTable table = new JTable();
     JScrollPane browse;

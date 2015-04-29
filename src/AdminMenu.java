@@ -36,8 +36,6 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         updateLibrary.setActionCommand("Update Library");
         other.setActionCommand("Other Features");
 
-
-
         this.setPreferredSize(new Dimension(900,600));//Size(1000, 1000);
         this.setTitle("Admin Menu");
         this.setVisible(true);
@@ -49,7 +47,7 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         setPrice = new JButton();
         setPrice.setName("Set Price");
         setPrice.setLabel("Set Price");
-        System.out.println("Set Price");
+        //System.out.println("Set Price");
         setPrice.setPreferredSize(new Dimension(100, 100));
         setPrice.setMaximumSize(new Dimension(200,300));
         setPrice.setAlignmentX(CENTER_ALIGNMENT);
@@ -61,7 +59,7 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         usageStats = new JButton();
         usageStats.setName("Usage Statistics");
         usageStats.setLabel("Usage Statistics");
-        System.out.println("Usage Statistics");
+        //System.out.println("Usage Statistics");
         usageStats.setPreferredSize(new Dimension(100, 100));
         usageStats.setMaximumSize(new Dimension(200,300));
         usageStats.setAlignmentX(CENTER_ALIGNMENT);
@@ -73,7 +71,7 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         updateLibrary = new JButton();
         updateLibrary.setName("Update Library");
         updateLibrary.setLabel("Update Library");
-        System.out.println("Update Library");
+        //System.out.println("Update Library");
         updateLibrary.setPreferredSize(new Dimension(100, 100));
         updateLibrary.setMaximumSize(new Dimension(200,300));
         updateLibrary.addActionListener(this);
@@ -85,7 +83,7 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         other = new JButton();
         other.setName("Other Features");
         other.setLabel("Other Features");
-        System.out.println("Other Features");
+        //System.out.println("Other Features");
         other.setPreferredSize(new Dimension(100, 100));
         other.setMaximumSize(new Dimension(200,300));
         other.setAlignmentX(CENTER_ALIGNMENT);

@@ -92,23 +92,26 @@ public class HomeScreen extends DefaultScreen implements ActionListener{
         String command = ((JButton)e.getSource()).getActionCommand();
         String[] args = new String[0];
         if(command.equals("Browse Songs")){
-            System.out.println("browse");
+            //System.out.println("browse");
+            BrowseSongs.main(args);
+            defp.setVisible(false);
+            dispose();
         }
         else if(command.equals("Search Songs")){
-            System.out.println("search");
+            //System.out.println("search");
             SearchScreen.main(args);
             defp.setVisible(false);
             dispose();
         }
         else if(command.equals("Admin")){
-            System.out.println("admin");
+            //System.out.println("admin");
 
             AdminLogin.main(args);
             defp.setVisible(false);
             dispose();
         }
         else if(command.equals("Payment")){
-            System.out.println("Payment");
+            //System.out.println("Payment");
 
             Payment.main(args);
             defp.setVisible(false);

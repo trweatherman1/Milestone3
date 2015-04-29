@@ -69,7 +69,7 @@ public class Payment extends DefaultScreen implements ActionListener{
         quarter = new JButton();
         quarter.setName("Add Quarter");
         quarter.setLabel("Add Quarter");
-        System.out.println("Add Quarter");
+        //System.out.println("Add Quarter");
         quarter.setPreferredSize(new Dimension(200, 100));
         quarter.addActionListener(this);
         pane.add(quarter);
@@ -80,7 +80,7 @@ public class Payment extends DefaultScreen implements ActionListener{
         dollar = new JButton();
         dollar.setName("Add Dollar");
         dollar.setLabel("Add Dollar");
-        System.out.println("Add Dollar");
+        //System.out.println("Add Dollar");
         dollar.setPreferredSize(new Dimension(200, 100));
         dollar.addActionListener(this);
         pane.add(dollar);
@@ -90,7 +90,7 @@ public class Payment extends DefaultScreen implements ActionListener{
         back = new JButton();
         back.setName("Back");
         back.setLabel("Back");
-        System.out.println("Back");
+        //System.out.println("Back");
         back.setPreferredSize(new Dimension(100, 100));
         back.addActionListener(this);
         pane.add(back);
@@ -110,7 +110,7 @@ public class Payment extends DefaultScreen implements ActionListener{
             text.setText("$ " + total);
         }
         else if(command.equals("Back")){
-            System.out.println("Back");
+          //  System.out.println("Back");
             HomeScreen.main(args);
             pane.setVisible(false);
             this.dispose();

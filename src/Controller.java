@@ -1,5 +1,3 @@
-package lib;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -29,7 +27,7 @@ public class Controller {
 
     String dbName = "derbyDB"; /**The name of the database**/
 
-    Connection conn = null; /**The database connection **/
+    Connection connect = null; /**The database connection **/
 
     /**The singleton instance of the controller.**/
     private static Controller instance;
@@ -41,7 +39,6 @@ public class Controller {
     //========================================================================
     private Controller(){
         records = new ArrayList<SongRecordModel>();
-
 
         this.createTable();
 
@@ -64,7 +61,7 @@ public class Controller {
     }//========================================================================
     //========================================================================
     /**
-     * Add a record t the list and insert into the database.
+     * Add a record r to the list and insert into the database.
      * @param r The record to be inserted.
      */
     //========================================================================
@@ -173,10 +170,10 @@ public class Controller {
             //  props.put("password", "user1");
 
             //Create connection
-            conn = DriverManager.getConnection(protocol + dbName + ";create=true", props);
+            connect = DriverManager.getConnection(protocol + dbName + ";create=true", props);
 
             System.out.println("Connected to and created database " + dbName);
-            return conn;
+            return connect;
         }
         catch(SQLException ex){
             System.out.println("Error connecting to database");
@@ -220,7 +217,7 @@ public class Controller {
                 }
             }
 
-            conn = null;
+            connect = null;
         }
     }//==========================================================================
 
@@ -231,24 +228,25 @@ public class Controller {
     //===========================================================================
     public void createTable() {
 
-        if (conn == null)
+        if (connect == null)
             connect();
 
         try{
 
             //Generate statement object to use.
-            Statement s =conn.createStatement();
+            Statement statement = connect.createStatement();
 
             //Use the create syntax to create a table.
 
-            s.execute("CREATE TABLE dir ( "
+            statement.execute("CREATE TABLE directory ( "
+                    + " id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY(START WITH 0, INCREMENT BY 1),"
                     + " song VARCHAR(20) NOT NULL ,"
                     + " artist VARCHAR(20) NOT NULL ,"
                     + " album VARCHAR(20) NOT NULL, "
                     + " genre VARCHAR(20) NOT NULL,");
 
 
-            conn.commit();
+            connect.commit();
             System.out.println("Created table location");
         }
         catch(SQLException ex){
@@ -268,13 +266,13 @@ public class Controller {
     //==========================================================================
     private void insert(SongRecordModel tr) {
 
-        if (conn == null)
+        if (connect == null)
             connect();
 
         try
         {
             PreparedStatement psInsert;
-            psInsert= conn.prepareStatement(  "insert into dir(song, artist, album, genre) values ( ?, ?, ?, ?)");
+            psInsert= connect.prepareStatement(  "insert into dir(song, artist, album, genre) values ( ?, ?, ?, ?)");
 
             psInsert.setString(1, tr.getSong());
             psInsert.setString(2, tr.getArtist());
@@ -283,7 +281,7 @@ public class Controller {
             
             psInsert.executeUpdate();
 
-            conn.commit();
+            connect.commit();
             System.out.println("Record inserted");
 
         }
@@ -306,12 +304,12 @@ public class Controller {
     //==========================================================================
     private void update(SongRecordModel tr) {
 
-        if (conn == null)
+        if (connect == null)
             connect();
 
         try{
             PreparedStatement psUpdate;
-            psUpdate= conn.prepareStatement(  "UPDATE dir SET song=?,  artist=?, album=?, genre=?");
+            psUpdate = connect.prepareStatement(  "UPDATE dir SET song=?,  artist=?, album=?, genre=?");
 
 
 
@@ -325,7 +323,7 @@ public class Controller {
             //psUpdate.setTimestamp(7, Timestamp.valueOf(tr.getDate()))  ;
             psUpdate.executeUpdate();
 
-            conn.commit();
+            connect.commit();
             System.out.println("Record updated");
         }
         catch(SQLException ex){
@@ -346,14 +344,14 @@ public class Controller {
     //===========================================================================
     private void remove(SongRecordModel tr){
 
-        if (conn == null)
+        if (connect == null)
             connect();
 
         try{
             PreparedStatement psUpdate;
-            psUpdate= conn.prepareStatement(  "DELETE FROM dir WHERE id = " );
+            psUpdate= connect.prepareStatement(  "DELETE FROM dir WHERE id = " );
             psUpdate.executeUpdate();
-            conn.commit();
+            connect.commit();
             System.out.println("Record removed:");
         }
         catch(SQLException ex){
@@ -372,16 +370,16 @@ public class Controller {
     //===========================================================================
     public void dropTable(){
 
-        if (conn == null)
+        if (connect == null)
             connect();
 
         try{
             //Generate statement object to use.
-            Statement s =conn.createStatement();
-            s.execute("drop table location");
+            Statement statement =connect.createStatement();
+            statement.execute("drop table location");
 
 
-            conn.commit();
+            connect.commit();
             System.out.println("Record updated");
         }
         catch(SQLException ex){
@@ -411,16 +409,16 @@ public class Controller {
     //===========================================================================
     private ArrayList<SongRecordModel> selectAll(boolean clear) {
 
-        if (conn == null)
+        if (connect == null)
             connect();
 
         ResultSet rs = null;
         try{
             //Generate statement object to use.
-            Statement s =conn.createStatement();
+            Statement statement =connect.createStatement();
 	   	
 		   /*We select the rows and verify the results. */
-            rs = s.executeQuery( "SELECT * FROM dir ORDER BY artist");
+            rs = statement.executeQuery( "SELECT * FROM dir ORDER BY artist");
 
             if (clear) records.clear();
 
@@ -456,13 +454,13 @@ public class Controller {
     //===========================================================================
     private ArrayList<SongRecordModel> select(String where, boolean clear) {
 
-        if (conn == null)
+        if (connect == null)
             connect();
 
         ResultSet rs = null;
         try{
             //Generate statement object to use.
-            Statement s =conn.createStatement();
+            Statement s =connect.createStatement();
 	   	
 		   /*We select the rows and verify the results. */
             rs = s.executeQuery( "SELECT * FROM dir ORDER BY artist WHERE " + where);
@@ -508,16 +506,16 @@ public class Controller {
         System.out.println("SELECT: " + query);
 
 
-        if (conn == null)
+        if (connect == null)
             connect();
 
         ResultSet rs = null;
         try{
             //Generate statement object to use.
-            Statement s =conn.createStatement();
+            Statement statement =connect.createStatement();
 	   	
 		   /*We select the rows and verify the results. */
-            rs = s.executeQuery( query);
+            rs = statement.executeQuery( query);
 
             if (clear) records.clear();
 

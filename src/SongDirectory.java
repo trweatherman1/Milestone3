@@ -1,5 +1,3 @@
-package lib;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -255,11 +253,11 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
 
     //==================================================================================================================
     /**
-     * A simmple main method to run our program.
+     * A main method to run the program.
      * @param args Data that can be passed in from the outside.
      */
     //==================================================================================================================
     public static void main(String[] args){
-        SongDirectory dir = new SongDirectory();
+        SongDirectory songDirectory = new SongDirectory();
     }//=================================================================================================================
 }//#####################################################################################################################

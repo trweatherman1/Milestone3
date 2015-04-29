@@ -1,5 +1,3 @@
-package lib;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,34 +5,32 @@ import java.util.ArrayList;
 
 //#####################################################################################################################
 /**
- * Created by Scott Andrew on 4/3/14.
- * @author Andrew Scott
- * @version V2.0 4/3/14
+ * Created by Trent Weatherman on 4/15/14.
+ * @author Trent Weatherman
+ * @author Jameson Burchette
+ * @author Austin Richburg
+ * @author Nick Widener
  *
- * History:
- * Version V1.0 4/3/14 Added first, last, telephone and checkbox
- * Version V2.0 4/12/14 Added genre, height and date fields
  *
- * A directory list item consists of t fields for first name, artist, telelhone album, genre, height, date and index.
+ * A directory list item consists of t fields for song, artist, album, and genre.
  *
  *///###################################################################################################################
 public class SongList extends JPanel implements  KeyListener, ItemListener, ActionListener {
     //  JTextField jtf_song, jtf_artist, jtf_album, jtf_genre;
     JCheckBox check;
 
-
     ArrayList<JTextField> items;/**A list of the row items in this object**/
 
     SongRecordModel record;
 
-    final int CHARACTER_WIDTH = 12;/**Max album of chars for most input fields**/
+    final int CHARACTER_WIDTH = 20;/**Max album of chars for most input fields**/
 
     final int APP_WIDTH = 800;/**The application width**/
 
     final int FIELD_COUNT = 5;/**The album of fields in this GUI item**/
 
     private boolean selectionState = false;/**The selection state of this row.**/
-    boolean isHeader = false;
+    //boolean isHeader = false;
 
     //==================================================================================================================
     /**
@@ -69,7 +65,7 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
 
 
 
-        //Create GUI elem,ents
+        //Create GUI elements
         items = new ArrayList<JTextField>();
         check = new JCheckBox();
 
@@ -82,7 +78,7 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
         for (int i = 1; i < FIELD_COUNT; i++){
             int size= CHARACTER_WIDTH;
 
-            //If fiels is 1 t then size is 4
+            //If fields is 1 t then size is 4
             if (i == 1)
                 size = 4;
 
@@ -171,7 +167,7 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
 
     //==================================================================================================================
     /**
-     * Gets the chack state of this object from the check box.
+     * Gets the check state of this object from the check box.
      * @return  The checked state.
      */
     //==================================================================================================================
@@ -181,7 +177,7 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
 
     //==================================================================================================================
     /**
-     * Update the telRecord refered to by this field.
+     * Update the songRecord referred to by this field.
      * @return
      */
     //==================================================================================================================
