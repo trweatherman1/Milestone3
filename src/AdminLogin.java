@@ -19,6 +19,8 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
         this.setPreferredSize(new Dimension(900, 600));
         this.setTitle("Admin Login");
         this.setVisible(true);
+        user = new JTextField("admin");
+        password = new JTextField("admin");
 
         pane = new JPanel();
         defp.add(pane, BorderLayout.CENTER);
@@ -48,7 +50,7 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
         con.gridy = 0;
         pane.add(userName, con);
 
-        user = new JTextField();
+        user = new JTextField("admin");
         con.fill = GridBagConstraints.HORIZONTAL;
         con.weightx = 0.25;
         con.gridx = 0;
@@ -64,7 +66,7 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
         pane.add(userPassword, con);
 
 
-        password = new JTextField();
+        password = new JTextField("admin");
         con.fill = GridBagConstraints.HORIZONTAL;
         con.weightx = 0.25;
         con.gridx = 0;
@@ -72,6 +74,7 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
         pane.add(password, con);
 
         submit = new JButton("Submit");
+        submit.setActionCommand("Submit");
         submit.addActionListener(this);
         con.fill = GridBagConstraints.HORIZONTAL;
         con.weightx = .25;
@@ -105,7 +108,10 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
             this.dispose();
         }
         if(command.equals("Submit")){
+            System.out.println("HEEY");
+            System.out.print(user.getText() + " " + password.getText());
             if(user.getText().equals("admin") && password.getText().equals("admin")){
+                System.out.println("fkdfk");
                 AdminMenu.main(args);
                 pane.setVisible(false);
                 this.dispose();
