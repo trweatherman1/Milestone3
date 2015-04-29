@@ -26,10 +26,6 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
         defp.add(pane, BorderLayout.CENTER);
         pane.setOpaque(false);
         pane.setLayout(new GridBagLayout());
-        submit = null;
-        user = null;
-        password = null;
-        back = null;
         GridBagConstraints con = new GridBagConstraints();
         setupButtons(con, pane, submit, user, password, back);
 
