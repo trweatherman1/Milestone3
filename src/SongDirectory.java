@@ -44,7 +44,7 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
 
         this.addCenterPanel();
         this.addSouthPanel();
-        this.addNorthPanel();
+
 
         this.setVisible(true);
 
@@ -93,26 +93,6 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
         }//end x
         directoryListing.revalidate();
         this.repaint();
-    }//=================================================================================================================
-
-    //==================================================================================================================
-    /**
-     * Add into the north panel search facilities.
-     */
-    //==================================================================================================================
-    public void addNorthPanel(){
-
-        cmd_search = new JButton("Search");
-        cmd_search.addActionListener(this);
-        jtf_search = new JTextField(40);
-
-        JPanel northPanel = new JPanel();
-        northPanel.add(new JLabel("Search Songs"));
-        northPanel.add(jtf_search);
-        northPanel.add(cmd_search);
-
-        this.add(northPanel,BorderLayout.NORTH);
-
     }//=================================================================================================================
 
 

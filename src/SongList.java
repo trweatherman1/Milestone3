@@ -23,11 +23,11 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
 
     SongRecordModel record;
 
-    final int CHARACTER_WIDTH = 20;/**Max album of chars for most input fields**/
+    final int CHARACTER_WIDTH = 100;/**Max album of chars for most input fields**/
 
     final int APP_WIDTH = 800;/**The application width**/
 
-    final int FIELD_COUNT = 5;/**The album of fields in this GUI item**/
+    final int FIELD_COUNT = 6;/**The album of fields in this GUI item**/
 
     private boolean selectionState = false;/**The selection state of this row.**/
     //boolean isHeader = false;
@@ -85,7 +85,7 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
 
             JTextField jtf = new JTextField(size);
             jtf.addKeyListener(this);
-            items.add( jtf);
+            items.add(jtf);
             this.add(Box.createGlue());
             this.add(jtf);
         }//end for
@@ -93,17 +93,17 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
         this.add(Box.createGlue());
 
         //Set the text of the input fields
-        items.get(0).setText(song);
-        items.get(1).setText(artist);
-        items.get(2).setText(album);
-        items.get(3).setText(genre);
+        items.get(1).setText(song);
+        items.get(2).setText(artist);
+        items.get(3).setText(album);
+        items.get(4).setText(genre);
 
 
         this.setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
 
-        this.setMaximumSize(new Dimension(APP_WIDTH,20));
-        this.setMinimumSize((new Dimension(APP_WIDTH,20)));
-        this.setPreferredSize(new Dimension(APP_WIDTH,20));
+        this.setMaximumSize(new Dimension(APP_WIDTH,50));
+        this.setMinimumSize((new Dimension(APP_WIDTH,50)));
+        this.setPreferredSize(new Dimension(APP_WIDTH,50));
 
 
         items.get(0).setBackground(Color.WHITE);

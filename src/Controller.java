@@ -239,11 +239,11 @@ public class Controller {
             //Use the create syntax to create a table.
 
             statement.execute("CREATE TABLE dir ( "
-                    + " id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY(START WITH 0, INCREMENT BY 1),"
-                    + " song VARCHAR(20) NOT NULL ,"
-                    + " artist VARCHAR(20) NOT NULL ,"
-                    + " album VARCHAR(20) NOT NULL, "
-                    + " genre VARCHAR(20) NOT NULL,");
+                    + " id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),"
+                    + " song VARCHAR(100) NOT NULL ,"
+                    + " artist VARCHAR(100) NOT NULL ,"
+                    + " album VARCHAR(100) NOT NULL, "
+                    + " genre VARCHAR(100) NOT NULL)");
 
 
             connect.commit();
