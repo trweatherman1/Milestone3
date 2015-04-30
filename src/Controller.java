@@ -272,7 +272,7 @@ public class Controller {
         try
         {
             PreparedStatement psInsert;
-            psInsert= connect.prepareStatement(  "insert into dir(song, artist, album, genre) values ( ?, ?, ?, ?)");
+            psInsert= connect.prepareStatement(  "insert into songDirectory(song, artist, album, genre) values ( ?, ?, ?, ?)");
 
             psInsert.setString(1, tr.getSong());
             psInsert.setString(2, tr.getArtist());
@@ -309,7 +309,7 @@ public class Controller {
 
         try{
             PreparedStatement psUpdate;
-            psUpdate = connect.prepareStatement(  "UPDATE dir SET song=?,  artist=?, album=?, genre=?");
+            psUpdate = connect.prepareStatement(  "UPDATE songDirectory SET song=?,  artist=?, album=?, genre=?");
 
 
 
@@ -348,8 +348,9 @@ public class Controller {
             connect();
 
         try{
+            Statement sta =connect.createStatement();
             PreparedStatement psUpdate;
-            psUpdate = connect.prepareStatement(  "DELETE FROM songDirectory WHERE song = Free Bird" );
+            psUpdate = connect.prepareStatement(  "DELETE FROM songDirectory WHERE song = \'Love Somebody\'" );
             psUpdate.executeUpdate();
             connect.commit();
             System.out.println("Record removed:");
@@ -418,7 +419,7 @@ public class Controller {
             Statement statement =connect.createStatement();
 	   	
 		   /*We select the rows and verify the results. */
-            rs = statement.executeQuery( "SELECT * FROM dir ORDER BY song");
+            rs = statement.executeQuery( "SELECT * FROM songDirectory ORDER BY song");
 
             if (clear) records.clear();
 
@@ -463,7 +464,7 @@ public class Controller {
             Statement s =connect.createStatement();
 	   	
 		   /*We select the rows and verify the results. */
-            rs = s.executeQuery( "SELECT * FROM dir ORDER BY artist WHERE " + where);
+            rs = s.executeQuery( "SELECT * FROM songDirectory ORDER BY artist WHERE " + where);
 
 
             if (clear) records.clear();
@@ -500,7 +501,7 @@ public class Controller {
     public ArrayList<SongRecordModel> selectNameAndNumber(String where, boolean clear) {
 
 
-        String query = "SELECT song, artist, album FROM dir  WHERE " + where;
+        String query = "SELECT song, artist, album FROM songDirectory  WHERE " + where;
 
 
         System.out.println("SELECT: " + query);
