@@ -104,10 +104,7 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
             this.dispose();
         }
         if(command.equals("Submit")){
-            System.out.println("HEEY");
-            System.out.print(user.getText() + " " + password.getText());
             if(user.getText().equals("admin") && password.getText().equals("admin")){
-                System.out.println("fkdfk");
                 AdminMenu.main(args);
                 pane.setVisible(false);
                 this.dispose();
