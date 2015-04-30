@@ -1,36 +1,270 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+//########################################################################################################
 /**
- * Created by Trent on 4/22/2015.
+ * Created by Andrew on 4/3/14.
  */
-public class BrowseSongs {
+//######################################################################################################################
+public class BrowseSongs extends JFrame implements ActionListener, InputDialogView.InputDialogListener {
 
-    String[] columnNames = {"Song", "Artist", "Album", "Genre"};
-    /*
-    Object[][] data = {
-            {"Dayum Baby Dayum", "Florida Georgia Line", "This is How We Roll", "Country"},
-            {"Downfall of us All", "A Day To Remember", "Homesick", "Punk"},
-            {"Drunk On You", "Luke Bryan", "TailGates & TanLines", "Country"},
-            {"In The Air Tonight", "Phil Collins", "Unknown", "Alternative"}
+    JButton back;
+
+    //JTextField jtf_search;
 
 
-    };
-    */
+    JScrollPane scrollArea;
+    JPanel directoryListing;
 
-    JTable table = new JTable();
-    JScrollPane browse;
+    JPanel southPanel;
 
-    public BrowseSongs(){
-        browse = new JScrollPane(table);
-        table.setFillsViewportHeight(true);
-        JPanel container = new JPanel();
-        container.setLayout(new BorderLayout());
-        container.add(table.getTableHeader(), BorderLayout.NORTH);
-        container.add(table, BorderLayout.CENTER);
+    Controller recordController;
+
+    //==================================================================================================================
+    /**
+     * A constructor for our TelephoneDirectory object.
+     */
+    //==================================================================================================================
+    public  BrowseSongs(){
+        super();
+
+        recordController = Controller.getInstance();
+
+        this.setSize(800,600);
+        this.setResizable(false);
+        this.setTitle("Browse Songs");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // this.setResizable(false);
+
+        this.setLayout(new BorderLayout());
+
+        this.addCenterPanel();
+        this.addSouthPanel();
+        this.addNorthPanel();
+
+
+        this.setVisible(true);
+
+
+        redraw(true);
+    }//=================================================================================================================
+
+    //==================================================================================================================
+    /**
+     * Add's the center panel containing the list of telephone numbers;
+     */
+    //==================================================================================================================
+    public void addCenterPanel(){
+        scrollArea = new JScrollPane();
+        scrollArea.setPreferredSize(new Dimension(WIDTH, HEIGHT - 40));
+        scrollArea.setBackground(Color.BLUE);
+
+
+        directoryListing = new JPanel();
+        directoryListing.setLayout(new BoxLayout(directoryListing, BoxLayout.Y_AXIS));
+
+        scrollArea = new JScrollPane(directoryListing);
+        scrollArea.setPreferredSize(new Dimension(WIDTH, HEIGHT - 40));
+
+
+
+        this.add(scrollArea, BorderLayout.CENTER);
+
+    }//=================================================================================================================
+
+    //==================================================================================================================
+    /**
+     * Redraw the table of data.
+     * @boolean loadAll When true the table data is reloaded in its entirety.
+     */
+    //==================================================================================================================
+    public void redraw(boolean loadAll){
+
+        directoryListing.removeAll();//Clear components.
+        if(loadAll)
+            recordController.loadAll();
+
+        for(int x = 0; x < recordController.records.size();  x++){
+            SongList d = new SongList(recordController.records.get(x));
+            directoryListing.add(d);
+        }//end x
+        directoryListing.revalidate();
+        this.repaint();
+    }//=================================================================================================================
+
+    public void addNorthPanel(){
+        JLabel songTitle = new JLabel("Song");
+        JLabel artistName = new JLabel("Artist");
+        JLabel albumName = new JLabel("Album");
+        JLabel genreStyle = new JLabel("Genre");
+
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new BoxLayout(northPanel,BoxLayout.X_AXIS));
+        northPanel.add(Box.createGlue());
+        northPanel.add(songTitle);
+        northPanel.add(Box.createGlue());
+        northPanel.add(artistName);
+        northPanel.add(Box.createGlue());
+        northPanel.add(albumName);
+        northPanel.add(Box.createGlue());
+        northPanel.add(genreStyle);
+        northPanel.add(Box.createGlue());
+        this.add(northPanel, BorderLayout.NORTH);
+
     }
 
+
+    //==================================================================================================================
+    /**
+     * Adds the panel at the bottom containing the add and delete buttons.
+     */
+    //==================================================================================================================
+    public void addSouthPanel(){
+        //Add south panel
+        back = new JButton("Back");
+        //deleteSong = new JButton("Delete");
+        //update = new JButton("Update");
+
+        back.addActionListener(this);
+        //deleteSong.addActionListener(this);
+        //update.addActionListener(this);
+
+        southPanel = new JPanel();
+        southPanel.setLayout(new BoxLayout(southPanel,BoxLayout.X_AXIS));
+        southPanel.add(Box.createGlue());
+        southPanel.add(back);
+        southPanel.add(Box.createGlue());
+        //southPanel.add(update);
+        //southPanel.add(Box.createGlue());
+        //southPanel.add(deleteSong);
+        //southPanel.add(Box.createGlue());
+        this.add(southPanel,BorderLayout.SOUTH);
+
+        Box.createHorizontalGlue();
+        Box.createVerticalGlue();
+        Box.createHorizontalBox();
+        Box.createVerticalBox();
+
+    }//=================================================================================================================
+
+    //==================================================================================================================
+    /**
+     * Starts the new record dialog.
+     */
+    //==================================================================================================================
+    public void openDialog(){
+        InputDialogView dialog = new InputDialogView();
+        dialog.addListener(this);
+    }//=================================================================================================================
+
+    //==================================================================================================================
+    /**
+     * Deletes the selected records
+     */
+    //==================================================================================================================
+    public void delRecord(){
+        for (int i =0 ; i < directoryListing.getComponentCount(); i++)
+        {
+            SongList d =  (SongList) directoryListing.getComponent(i);
+
+            if(d.isChecked()){
+                this.recordController.removeRecord( d.getRecord() );
+            }
+        }
+
+        this.redraw(true);
+    }//=================================================================================================================
+
+    //==================================================================================================================
+    /**
+     * update the selected rows if they have been written in.
+     */
+    //==================================================================================================================
+    public void updateSelected(){
+
+        for (int i =0 ; i < directoryListing.getComponentCount(); i++)
+        {
+            SongList d =  (SongList) directoryListing.getComponent(i);
+
+            if(d.isChecked()){
+                this.recordController.updateRecord(d.getRecord());
+            }
+        }
+    }//=================================================================================================================
+
+    //==================================================================================================================
+    /**
+     * Search for data and replace it in the grid of results
+     * @param terms
+     */
+    //==================================================================================================================
+    public void search(String terms){
+        recordController.selectNameAndNumber("artist LIKE '" + terms + "%'",true );
+
+        recordController.selectNameAndNumber("song LIKE '" + terms + "%'",false );
+
+        this.redraw(false);
+    }//=================================================================================================================
+
+    //==================================================================================================================
+    /**
+     * Called when the dialog has oked an input.
+     * @param r The telRecord to add
+     */
+    //==================================================================================================================
+    public void dialogAddRecord(SongRecordModel r) {
+        this.recordController.addRecord(r);
+
+        this.redraw(true);
+    }//=================================================================================================================
+
+
+    //==================================================================================================================
+    /**
+     *  Called when one of the buttons is pressed.
+     * @param e Contains the object the caused the event.
+     */
+    //==================================================================================================================
+    public void actionPerformed ( ActionEvent e ){
+        Object command = e.getSource();
+        String[] args = new String[0];
+
+        if(command == back){
+            System.out.println("Back");
+            //openDialog();
+            HomeScreen.main(args);
+            this.setVisible(false);
+            dispose();
+        }
+        /*
+        else if(cmp == update){
+            System.out.println("Update Selected");
+            updateSelected();
+        }
+
+        else if (command == deleteSong){
+            System.out.println("Del");
+            delRecord();
+        }
+        /*
+        else if(command == cmd_search){
+            String src = jtf_search.getText();
+            search(src);
+        }*/
+    }//end action performed=============================================================================================
+
+
+
+
+    //==================================================================================================================
+    /**
+     * A main method to run the program.
+     * @param args Data that can be passed in from the outside.
+     */
+    //==================================================================================================================
     public static void main(String[] args){
-        BrowseSongs brow = new BrowseSongs();
-    }
-}
+        BrowseSongs browse = new BrowseSongs();
+    }//=================================================================================================================
+}//#####################################################################################################################

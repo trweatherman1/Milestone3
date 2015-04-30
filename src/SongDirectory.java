@@ -10,11 +10,13 @@ import java.awt.event.ActionListener;
 //######################################################################################################################
 public class SongDirectory extends JFrame implements ActionListener, InputDialogView.InputDialogListener {
 
-    JButton cmd_add;
-    JButton cmd_del;
-    JButton cmd_update;
-    JButton cmd_search;
-    JTextField jtf_search;
+    JButton addSong;
+    JButton deleteSong;
+    JButton update;
+    JButton back;
+    
+    //JTextField jtf_search;
+
 
     JScrollPane scrollArea;
     JPanel directoryListing;
@@ -33,7 +35,6 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
 
         recordController = Controller.getInstance();
 
-
         this.setSize(800,600);
         this.setResizable(false);
         this.setTitle("Browse Songs");
@@ -44,6 +45,7 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
 
         this.addCenterPanel();
         this.addSouthPanel();
+        this.addNorthPanel();
 
 
         this.setVisible(true);
@@ -95,6 +97,27 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
         this.repaint();
     }//=================================================================================================================
 
+    public void addNorthPanel(){
+        JLabel songTitle = new JLabel("Song");
+        JLabel artistName = new JLabel("Artist");
+        JLabel albumName = new JLabel("Album");
+        JLabel genreStyle = new JLabel("Genre");
+
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new BoxLayout(northPanel,BoxLayout.X_AXIS));
+        northPanel.add(Box.createGlue());
+        northPanel.add(songTitle);
+        northPanel.add(Box.createGlue());
+        northPanel.add(artistName);
+        northPanel.add(Box.createGlue());
+        northPanel.add(albumName);
+        northPanel.add(Box.createGlue());
+        northPanel.add(genreStyle);
+        northPanel.add(Box.createGlue());
+        this.add(northPanel, BorderLayout.NORTH);
+
+    }
+
 
     //==================================================================================================================
     /**
@@ -103,22 +126,26 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
     //==================================================================================================================
     public void addSouthPanel(){
         //Add south panel
-        cmd_add = new JButton("Add");
-        cmd_del = new JButton("Delete");
-        cmd_update = new JButton("Update");
+        back = new JButton("Back");
+        addSong = new JButton("Add");
+        deleteSong = new JButton("Delete");
+        update = new JButton("Update");
 
-        cmd_add.addActionListener(this);
-        cmd_del.addActionListener(this);
-        cmd_update.addActionListener(this);
+        back.addActionListener(this);
+        addSong.addActionListener(this);
+        deleteSong.addActionListener(this);
+        update.addActionListener(this);
 
         southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel,BoxLayout.X_AXIS));
         southPanel.add(Box.createGlue());
-        southPanel.add(cmd_add);
+        southPanel.add(back);
         southPanel.add(Box.createGlue());
-        southPanel.add(cmd_update);
+        southPanel.add(addSong);
         southPanel.add(Box.createGlue());
-        southPanel.add(cmd_del);
+        southPanel.add(update);
+        southPanel.add(Box.createGlue());
+        southPanel.add(deleteSong);
         southPanel.add(Box.createGlue());
         this.add(southPanel,BorderLayout.SOUTH);
 
@@ -135,8 +162,8 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
      */
     //==================================================================================================================
     public void openDialog(){
-        InputDialogView diag = new InputDialogView();
-        diag.addListener(this);
+        InputDialogView dialog = new InputDialogView();
+        dialog.addListener(this);
     }//=================================================================================================================
 
     //==================================================================================================================
@@ -208,23 +235,28 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
      */
     //==================================================================================================================
     public void actionPerformed ( ActionEvent e ){
-        Object cmp = e.getSource();
+        Object command = e.getSource();
+        String[] args = new String[0];
 
-        if(cmp == cmd_add){
+        if(command == addSong){
             System.out.println("Add");
             openDialog();
         }
-        else if(cmp == cmd_update){
+
+        else if(command == update){
             System.out.println("Update Selected");
             updateSelected();
         }
-        else if (cmp == cmd_del){
+
+        else if (command == deleteSong){
             System.out.println("Del");
             delRecord();
         }
-        else if(cmp == cmd_search){
-            String src = jtf_search.getText();
-            search(src);
+
+        else if(command == back){
+            AdminMenu.main(args);
+            this.setVisible(false);
+            dispose();
         }
     }//end action performed=============================================================================================
 

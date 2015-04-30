@@ -121,7 +121,7 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
         }
         else if(command.equals("Update Library")){
             //System.out.println("Update Library");
-            UpdateLibrary.main(args);
+            SongDirectory.main(args);
             pane.setVisible(false);
             this.dispose();
         }

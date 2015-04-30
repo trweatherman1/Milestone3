@@ -238,7 +238,7 @@ public class Controller {
 
             //Use the create syntax to create a table.
 
-            statement.execute("CREATE TABLE dir ( "
+            statement.execute("CREATE TABLE songDirectory ( "
                     + " id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),"
                     + " song VARCHAR(100) NOT NULL ,"
                     + " artist VARCHAR(100) NOT NULL ,"
@@ -339,17 +339,17 @@ public class Controller {
     //===========================================================================
     /**
      * Remove a record from the database.
-     * @param tr
+     * @param file
      */
     //===========================================================================
-    private void remove(SongRecordModel tr){
+    private void remove(SongRecordModel file){
 
-        if (connect == null)
+        if (connect == null )
             connect();
 
         try{
             PreparedStatement psUpdate;
-            psUpdate= connect.prepareStatement(  "DELETE FROM dir WHERE id = " );
+            psUpdate = connect.prepareStatement(  "DELETE FROM songDirectory WHERE song = Free Bird" );
             psUpdate.executeUpdate();
             connect.commit();
             System.out.println("Record removed:");
@@ -418,7 +418,7 @@ public class Controller {
             Statement statement =connect.createStatement();
 	   	
 		   /*We select the rows and verify the results. */
-            rs = statement.executeQuery( "SELECT * FROM dir ORDER BY artist");
+            rs = statement.executeQuery( "SELECT * FROM dir ORDER BY song");
 
             if (clear) records.clear();
 

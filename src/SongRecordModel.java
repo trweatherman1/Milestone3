@@ -9,7 +9,10 @@
  */
 //###########################################################################
 /**
- * @author Andrew
+ * @author Trent Weatherman
+ * @author Nick Widener
+ * @author Austin Richburg
+ * @author Jameson Burchette
  */
 public class SongRecordModel {
 

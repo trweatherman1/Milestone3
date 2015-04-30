@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Nick Widener
  *
  *
- * A directory list item consists of t fields for song, artist, album, and genre.
+ * A directory list item consists of fields for song, artist, album, and genre.
  *
  *///###################################################################################################################
 public class SongList extends JPanel implements  KeyListener, ItemListener, ActionListener {

@@ -23,9 +23,9 @@ public class InputDialogView extends JDialog implements ActionListener {
     String[] headings = {"Song","Artist", "Album", "Genre"};
 
 
-    JButton cmd_ok, cmd_cancel;
+    JButton addSong, deleteSong;
     JPanel inputPanel;
-    final int CHARACTER_WIDTH = 12;
+    final int CHARACTER_WIDTH = 25;
 
     ArrayList<InputDialogListener> idl;
 
@@ -94,18 +94,18 @@ public class InputDialogView extends JDialog implements ActionListener {
     //==================================================================================================================
     private void addButtonPanel(){
         //Add south panel
-        cmd_ok = new JButton("Add");
-        cmd_cancel = new JButton("Delete");
+        addSong = new JButton("Add");
+        deleteSong = new JButton("Delete");
 
-        cmd_ok.addActionListener(this);
-        cmd_cancel.addActionListener(this);
+        addSong.addActionListener(this);
+        deleteSong.addActionListener(this);
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel,BoxLayout.X_AXIS));
         southPanel.add(Box.createGlue());
-        southPanel.add(cmd_ok);
+        southPanel.add(addSong);
         southPanel.add(Box.createGlue());
-        southPanel.add(cmd_cancel);
+        southPanel.add(deleteSong);
         southPanel.add(Box.createGlue());
 
         //Constraints for panel
@@ -127,11 +127,11 @@ public class InputDialogView extends JDialog implements ActionListener {
     public void actionPerformed ( ActionEvent e ){
         Object cmp = e.getSource();
 
-        if(cmp == cmd_ok){
+        if(cmp == addSong){
             this.setVisible(false);
             this.fireEvent(true);
         }
-        else if (cmp == cmd_cancel){
+        else if (cmp == deleteSong){
             this.setVisible(false);
             this.fireEvent(false);
         }
