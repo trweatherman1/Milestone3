@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-//#####################################################################################################################
+
 /**
  * Created by Trent Weatherman on 4/15/14.
  * @author Trent Weatherman
@@ -14,9 +14,8 @@ import java.util.ArrayList;
  *
  * A directory list item consists of fields for song, artist, album, and genre.
  *
- *///###################################################################################################################
+ */
 public class SongList extends JPanel implements  KeyListener, ItemListener, ActionListener {
-    //  JTextField jtf_song, jtf_artist, jtf_album, jtf_genre;
     JCheckBox check;
 
     ArrayList<JTextField> items;/**A list of the row items in this object**/
@@ -30,29 +29,24 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
     final int FIELD_COUNT = 6;/**The album of fields in this GUI item**/
 
     private boolean selectionState = false;/**The selection state of this row.**/
-    //boolean isHeader = false;
 
-    //==================================================================================================================
+
     /**
      * A no argument constructor
      */
-    //==================================================================================================================
     public SongList(){
         this("","","","");
-    }//=================================================================================================================
-
-    //==================================================================================================================
+    }
     /**
      * Creates a list item by receiving a TelRecord.
      * @param r The record to visualize.
      */
-    //==================================================================================================================
+
+
     public SongList(SongRecordModel r){
         this(r.getSong(),r.getArtist(),r.getAlbum(), r.getGenre());
         this.record = r;
-    }//=================================================================================================================
-
-    //==================================================================================================================
+    }
     /**
      * Creates a listing by specifying all fields of a TelRecord.
      * @param song
@@ -60,7 +54,6 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
      * @param album
      * @param genre
      */
-    //==================================================================================================================
     private SongList(String song, String artist, String album, String genre){
 
 
@@ -111,23 +104,19 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
         check.addItemListener(this);
         check.addActionListener(this);
 
-    }//end constructor==================================================================================================
+    }
 
-
-    //==================================================================================================================
     /**
      * Toggle the selection state of the DirectoryListItem.
      */
-    //==================================================================================================================
     public void toggleCheck(){
 
         setChecked(!selectionState);
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
     /**
      * Set the item to be checked and change the background color of all items.
-     * @param checked
+     * @param checked for if checked
      */
     //==================================================================================================================
     public void setChecked(boolean checked){
@@ -148,14 +137,13 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
         this.check.setBackground(color);
 
         setEditable(false);
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
+
     /**
      * Sets whether the text fields are editable or not.
      * @param editable true or false.
      */
-    //==================================================================================================================
     public void setEditable(boolean editable){
         for (int i = 0; i < items.size(); i++)
             items.get(i).setEditable(editable);
@@ -163,24 +151,21 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
         //check.setEnabled(editable);
 
         items.get(0).setEditable(false);//never editable.
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
     /**
      * Gets the check state of this object from the check box.
      * @return  The checked state.
      */
-    //==================================================================================================================
     public boolean isChecked(){
         return this.check.isSelected();
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
+
     /**
      * Update the songRecord referred to by this field.
-     * @return
+     * @return songRecord
      */
-    //==================================================================================================================
     private SongRecordModel toRecord(){
 
         record.setSong(items.get(1).getText());
@@ -189,45 +174,54 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
         record.setGenre(items.get(4).getText());
 
         return record;
-    }//=================================================================================================================
-
-    //==================================================================================================================
+    }
 
     /**
      *  Listens for when the check box is selected/unselected
      * @param e The actionEvent containing the component that caused the event.
      */
-    //==================================================================================================================
     @Override
     public void itemStateChanged(ItemEvent e) {
 
 
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
+
     /**
-     *
-     * @return
+     * Get the record for the song
+     * @return songRecord
      */
-    //==================================================================================================================
     public SongRecordModel getRecord() {
         return record;
-    }//=================================================================================================================
+    }
+
 
     Controller cnt;
 
+    /**
+     * Handles action for key typed
+     * @param e the event
+     */
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
         cnt = Controller.getInstance();
     }
 
+    /**
+     * Handles action for key pressd
+     * @param e the event
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
 
     }
 
+    /**
+     * Action for key released
+     * @param e the event
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         // TODO Auto-generated method stub
@@ -237,6 +231,10 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
     }
 
 
+    /**
+     * Handles action performed
+     * @param e the event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -245,8 +243,7 @@ public class SongList extends JPanel implements  KeyListener, ItemListener, Acti
             AbstractButton ab = (AbstractButton) e.getSource();
             boolean selected = ab.getModel().isSelected();
             this.setChecked(selected);
-            // toggleCheck();
         }
 
     }
-}//end class############################################################################################################
+}

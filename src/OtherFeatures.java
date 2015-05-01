@@ -12,9 +12,11 @@ public class OtherFeatures extends DefaultScreen implements ActionListener{
 
     JPanel pane;
 
-    SongPlayer sp = new SongPlayer();
+    MusicPlayer sp = new MusicPlayer();
 
     Stage stage;
+
+    SongRecordModel song;
 
     public OtherFeatures() {
         pane = new JPanel(new BorderLayout());
@@ -97,7 +99,7 @@ public class OtherFeatures extends DefaultScreen implements ActionListener{
             this.dispose();
         }
         else if (command.equals("Play")) {
-            sp.start(stage);
+            sp.queueSong(song);
         }
     }
 
