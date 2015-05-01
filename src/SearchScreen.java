@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
  *
  * @version April 2015
  *
+ *
  * Creates the search screen for JukeMeister
  * Extends Default screen and implements the
  * ActionListener interface so buttons can be clicked
