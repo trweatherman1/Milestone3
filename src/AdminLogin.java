@@ -145,7 +145,7 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
         //add the submit to the pane
         pane.add(submit, con);
 
-        /**sets the JButton back to say back and set the ActionCommand **/
+        /**sets the JButton back to say Back and set the ActionCommand **/
         back = new JButton("Back");
         back.setActionCommand("Back");
         back.addActionListener(this);

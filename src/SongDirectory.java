@@ -10,26 +10,26 @@ import java.awt.event.ActionListener;
 //######################################################################################################################
 public class SongDirectory extends JFrame implements ActionListener, InputDialogView.InputDialogListener {
 
-    JButton addSong;
-    JButton deleteSong;
-    JButton update;
-    JButton back;
+    /**All of the buttons used in this screen**/
+    JButton addSong,deleteSong, update, back;
     
-    //JTextField jtf_search;
+    /**the scroller panel**/
+    JScrollPane scrollPane;
+    
+    /**the listing of items in the scrollPane**/
+    JPanel listing;
 
+    /**A JPanel that will be in the south border of the frame**/
+    JPanel south;
 
-    JScrollPane scrollArea;
-    JPanel directoryListing;
-
-    JPanel southPanel;
-
+    /**a controller object for the records in the class**/
     Controller recordController;
 
-    //==================================================================================================================
+    
     /**
-     * A constructor for our TelephoneDirectory object.
+     * A constructor that will build our SongDirectory
      */
-    //==================================================================================================================
+    
     public  SongDirectory(){
         super();
 
@@ -43,88 +43,91 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
 
         this.setLayout(new BorderLayout());
 
-        this.addCenterPanel();
-        this.addSouthPanel();
-        this.addNorthPanel();
+        this.addCenter();
+        this.addSouth();
+        this.addNorth();
 
 
         this.setVisible(true);
 
 
         redraw(true);
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
+   
     /**
-     * Add's the center panel containing the list of telephone numbers;
+     * Adds the center JPanel that will contain the scrollPane 
      */
-    //==================================================================================================================
-    public void addCenterPanel(){
-        scrollArea = new JScrollPane();
-        scrollArea.setPreferredSize(new Dimension(WIDTH, HEIGHT - 40));
-        scrollArea.setBackground(Color.BLUE);
+    
+    public void addCenter(){
+        scrollPane = new JScrollPane();
+        scrollPane.setPreferredSize(new Dimension(WIDTH, HEIGHT - 40));
+        scrollPane.setBackground(Color.BLUE);
 
 
-        directoryListing = new JPanel();
-        directoryListing.setLayout(new BoxLayout(directoryListing, BoxLayout.Y_AXIS));
+        listing = new JPanel();
+        listing.setLayout(new BoxLayout(listing, BoxLayout.Y_AXIS));
 
-        scrollArea = new JScrollPane(directoryListing);
-        scrollArea.setPreferredSize(new Dimension(WIDTH, HEIGHT - 40));
+        scrollPane = new JScrollPane(listing);
+        scrollPane.setPreferredSize(new Dimension(WIDTH, HEIGHT - 40));
 
 
 
-        this.add(scrollArea, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
 
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
+    
     /**
-     * Redraw the table of data.
-     * @boolean loadAll When true the table data is reloaded in its entirety.
+     * Redraw the table if there has been any changes to it
+     * @boolean loadAll for if the table has been redrawn
      */
-    //==================================================================================================================
+    
     public void redraw(boolean loadAll){
 
-        directoryListing.removeAll();//Clear components.
+        listing.removeAll();//Clear components.
         if(loadAll)
             recordController.loadAll();
 
         for(int x = 0; x < recordController.records.size();  x++){
             SongList d = new SongList(recordController.records.get(x));
-            directoryListing.add(d);
+            listing.add(d);
         }//end x
-        directoryListing.revalidate();
+        listing.revalidate();
         this.repaint();
-    }//=================================================================================================================
+    }
 
-    public void addNorthPanel(){
+    /**
+     * A frame that will add the north JPanel to the main panel
+     */
+    public void addNorth(){
         JLabel songTitle = new JLabel("Song");
         JLabel artistName = new JLabel("Artist");
         JLabel albumName = new JLabel("Album");
         JLabel genreStyle = new JLabel("Genre");
 
-        JPanel northPanel = new JPanel();
-        northPanel.setLayout(new BoxLayout(northPanel,BoxLayout.X_AXIS));
-        northPanel.add(Box.createGlue());
-        northPanel.add(songTitle);
-        northPanel.add(Box.createGlue());
-        northPanel.add(artistName);
-        northPanel.add(Box.createGlue());
-        northPanel.add(albumName);
-        northPanel.add(Box.createGlue());
-        northPanel.add(genreStyle);
-        northPanel.add(Box.createGlue());
-        this.add(northPanel, BorderLayout.NORTH);
+        JPanel north = new JPanel();
+        north.setLayout(new BoxLayout(north,BoxLayout.X_AXIS));
+        north.add(Box.createGlue());
+        north.add(songTitle);
+        north.add(Box.createGlue());
+        north.add(artistName);
+        north.add(Box.createGlue());
+        north.add(albumName);
+        north.add(Box.createGlue());
+        north.add(genreStyle);
+        north.add(Box.createGlue());
+        this.add(north, BorderLayout.NORTH);
 
     }
 
 
-    //==================================================================================================================
+    
     /**
      * Adds the panel at the bottom containing the add and delete buttons.
      */
-    //==================================================================================================================
-    public void addSouthPanel(){
+    
+    public void addSouth(){
         //Add south panel
         back = new JButton("Back");
         addSong = new JButton("Add");
@@ -136,18 +139,18 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
         deleteSong.addActionListener(this);
         update.addActionListener(this);
 
-        southPanel = new JPanel();
-        southPanel.setLayout(new BoxLayout(southPanel,BoxLayout.X_AXIS));
-        southPanel.add(Box.createGlue());
-        southPanel.add(back);
-        southPanel.add(Box.createGlue());
-        southPanel.add(addSong);
-        southPanel.add(Box.createGlue());
-        southPanel.add(update);
-        southPanel.add(Box.createGlue());
-        southPanel.add(deleteSong);
-        southPanel.add(Box.createGlue());
-        this.add(southPanel,BorderLayout.SOUTH);
+        south = new JPanel();
+        south.setLayout(new BoxLayout(south,BoxLayout.X_AXIS));
+        south.add(Box.createGlue());
+        south.add(back);
+        south.add(Box.createGlue());
+        south.add(addSong);
+        south.add(Box.createGlue());
+        south.add(update);
+        south.add(Box.createGlue());
+        south.add(deleteSong);
+        south.add(Box.createGlue());
+        this.add(south,BorderLayout.SOUTH);
 
         Box.createHorizontalGlue();
         Box.createVerticalGlue();
@@ -156,25 +159,25 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
 
     }//=================================================================================================================
 
-    //==================================================================================================================
+    
     /**
      * Starts the new record dialog.
      */
-    //==================================================================================================================
+    
     public void openDialog(){
         InputDialogView dialog = new InputDialogView();
         dialog.addListener(this);
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
+    
     /**
      * Deletes the selected records
      */
-    //==================================================================================================================
+    
     public void delRecord(){
-        for (int i =0 ; i < directoryListing.getComponentCount(); i++)
+        for (int i =0 ; i < listing.getComponentCount(); i++)
         {
-            SongList d =  (SongList) directoryListing.getComponent(i);
+            SongList d =  (SongList) listing.getComponent(i);
 
             if(d.isChecked()){
                 this.recordController.removeRecord( d.getRecord() );
@@ -182,58 +185,44 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
         }
 
         this.redraw(true);
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
+    
     /**
-     * update the selected rows if they have been written in.
+     * update the rows that any changes have been made to.
      */
-    //==================================================================================================================
+   
     public void updateSelected(){
 
-        for (int i =0 ; i < directoryListing.getComponentCount(); i++)
+        for (int i =0 ; i < listing.getComponentCount(); i++)
         {
-            SongList d =  (SongList) directoryListing.getComponent(i);
+            SongList d =  (SongList) listing.getComponent(i);
 
             if(d.isChecked()){
                 this.recordController.updateRecord(d.getRecord());
             }
         }
-    }//=================================================================================================================
-
-    //==================================================================================================================
+    }
+    
+        
     /**
-     * Search for data and replace it in the grid of results
-     * @param terms
+     * Called when the the input has been verified
+     * @param record The record to add
      */
-    //==================================================================================================================
-    public void search(String terms){
-        recordController.selectNameAndNumber("artist LIKE '" + terms + "%'",true );
-
-        recordController.selectNameAndNumber("song LIKE '" + terms + "%'",false );
-
-        this.redraw(false);
-    }//=================================================================================================================
-
-    //==================================================================================================================
-    /**
-     * Called when the dialog has oked an input.
-     * @param r The telRecord to add
-     */
-    //==================================================================================================================
-    public void dialogAddRecord(SongRecordModel r) {
-        this.recordController.addRecord(r);
+   
+    public void dialogAddRecord(SongRecordModel record) {
+        this.recordController.addRecord(record);
 
         this.redraw(true);
-    }//=================================================================================================================
+    }
 
 
-    //==================================================================================================================
+    
     /**
-     *  Called when one of the buttons is pressed.
+     *  A listener for one the action commands of the buttons 
      * @param e Contains the object the caused the event.
      */
-    //==================================================================================================================
+    
     public void actionPerformed ( ActionEvent e ){
         Object command = e.getSource();
         String[] args = new String[0];
@@ -258,18 +247,15 @@ public class SongDirectory extends JFrame implements ActionListener, InputDialog
             this.setVisible(false);
             dispose();
         }
-    }//end action performed=============================================================================================
+    }
 
 
-
-
-    //==================================================================================================================
     /**
-     * A main method to run the program.
-     * @param args Data that can be passed in from the outside.
+     * A method to run the program.
+     * @param args 
      */
-    //==================================================================================================================
+    
     public static void main(String[] args){
         SongDirectory songDirectory = new SongDirectory();
-    }//=================================================================================================================
-}//#####################################################################################################################
+    }
+}
