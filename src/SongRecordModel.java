@@ -123,5 +123,11 @@ public class SongRecordModel {
         this.genre = genre;
     }
 
-
+    public String[][] getSongInfo() {
+        String[][] info = {{"Title", song},
+                {"Artist", artist},
+                {"Album", album},
+                {"Genre", genre}};
+        return info;
+    }
 }
