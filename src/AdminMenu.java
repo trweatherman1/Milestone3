@@ -3,10 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 /**
- * Created by Trent on 4/20/2015.
+ * @author Trent Weatherman
+ * @author Nicholas Widener
+ * @author Austin Richburg
+ * @author Jameson Burchette
+ *
+ * @version April 2015
+ *
+ * Creates Admin Menu options screen
+ * extends the Default screen components
+ * and implements the ActionListener interface
+ * to handle button clicks
  */
-public class AdminMenu extends DefaultScreen implements ActionListener{
+public class AdminMenu extends DefaultScreen implements ActionListener {
 
     /**The main JPanel of the JFrame**/
     JPanel pane = new JPanel();
@@ -107,7 +118,7 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
      * A method that sets up the setPriceButton with it's text, size, and the action listener.
      *
      *
-     * @param pane
+     * @param pane pane the button is held in
      */
     public void setPriceButton(JPanel pane){
         setPrice = new JButton();
@@ -125,7 +136,7 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
      * A method that sets up the usageStatsButton with it's text, size, and the action listener.
      *
      *
-     * @param pane
+     * @param pane pane the usage button is held in
      */
     public void usageStatsButton(JPanel pane){
         usageStats = new JButton();
@@ -143,7 +154,7 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
      * A method that sets up the updateLibraryButton with it's text, size, and the action listener.
      *
      *
-     * @param pane
+     * @param pane pane the update library button is held in
      */
     public void updateLibraryButton(JPanel pane){
         updateLibrary = new JButton();
@@ -179,7 +190,7 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
      * A method that sets up the logoutButton with it's text, size, and the action listener.
      *
      *
-     * @param pane
+     * @param pane pane the logout button is in
      */
     public void logoutButton(JPanel pane){
         logout = new JButton();
@@ -192,7 +203,11 @@ public class AdminMenu extends DefaultScreen implements ActionListener{
 
     }
 
-    /**Listens for the click of the button**/
+    /**Listens for the click of the button
+     *
+     * @param e event
+     *
+     **/
     @Override
     public void actionPerformed(ActionEvent e) {
         /**sets a String command equal to the getActionCommand**/

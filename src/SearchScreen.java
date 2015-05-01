@@ -4,42 +4,66 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Nicholas on 4/20/2015.
+ * @author Trent Weatherman
+ * @author Nicholas Widener
+ * @author Austin Richburg
+ * @author Jameson Burchette
+ *
+ * @version April 2015
+ *
+ * Creates the search screen for JukeMeister
+ * Extends Default screen and implements the
+ * ActionListener interface so buttons can be clicked
  */
 public class SearchScreen extends DefaultScreen implements ActionListener {
+    JPanel pane; /**main panel for screen**/
 
+    JPanel center; /**center panel for screen**/
 
-    JPanel pane;
-    JPanel center;
-    JButton search;
-    JButton back;
-    JTextField text1;
-    JLabel title;
-    Keyboard keyboard = new Keyboard();
+    JButton search; /**search button**/
 
+    JButton back; /**back button**/
 
+    static JTextField text1; /**text field for search**/
 
+    JLabel title; /**title for the screen**/
 
+    Keyboard keyboard = new Keyboard(); /**create new keyboard**/
+
+    /**
+     * Creates the search screen
+     */
     public SearchScreen() {
+        //create the main panel
         pane = new JPanel();
+        //create the text field for search
         text1 = new JTextField();
+        //create the label for title
         title = new JLabel();
+        //add the main panel to the default panel is default screen
         defp.add(pane);
+        //set pane not opaque
         pane.setOpaque(false);
-
+        //set size of text field
         text1.setPreferredSize(new Dimension(600, 50));
+        //align it to center
         text1.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        //set the layout for main panel
         pane.setLayout(new BorderLayout());
 
+        //call to setup center elements
         setUpCenter();
 
+        //add to main panel
         pane.add(center, BorderLayout.CENTER);
+        //add to main panel
         pane.add(text1, BorderLayout.NORTH);
 
+        //add keyboard to main panel
         pane.add(keyboard, BorderLayout.SOUTH);
 
-
+        //set the size
         this.setSize(900, 600);
         this.setTitle("Search Screen");
         this.setVisible(true);
@@ -47,6 +71,10 @@ public class SearchScreen extends DefaultScreen implements ActionListener {
     }
 
 
+    /**
+     * Sets up the search songs button
+     * @param pane the pane the button will be applied to
+     */
     public void searchSongsButton(JPanel pane){
         search = new JButton();
         search.setName("Search Songs");
@@ -57,7 +85,10 @@ public class SearchScreen extends DefaultScreen implements ActionListener {
         pane.add(search);
     }
 
-
+    /**
+     * Sets up the back button
+     * @param pane the pane the button will be applied to
+     */
     public void backButton(JPanel pane){
         back = new JButton();
         back.setName("Back");
@@ -68,6 +99,10 @@ public class SearchScreen extends DefaultScreen implements ActionListener {
         pane.add(back);
     }
 
+    /**
+     * Setup all of the elements that will be in the center
+     * of BorderLayout
+     */
     private void setUpCenter() {
         center = new JPanel();
         center.setOpaque(false);
@@ -86,8 +121,10 @@ public class SearchScreen extends DefaultScreen implements ActionListener {
     }
 
 
-
-
+    /**
+     * Handles actions taken with buttons
+     * @param e the event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
@@ -99,6 +136,10 @@ public class SearchScreen extends DefaultScreen implements ActionListener {
         }
     }
 
+    /**
+     * Runs the screen
+     * @param args arguments
+     */
     public static void main(String[] args) {
         SearchScreen ss = new SearchScreen();
     }

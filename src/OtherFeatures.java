@@ -1,3 +1,5 @@
+import javafx.stage.Stage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,9 @@ public class OtherFeatures extends DefaultScreen implements ActionListener{
 
     JPanel pane;
 
+    SongPlayer sp = new SongPlayer();
+
+    Stage stage;
 
     public OtherFeatures() {
         pane = new JPanel(new BorderLayout());
@@ -18,6 +23,13 @@ public class OtherFeatures extends DefaultScreen implements ActionListener{
         addNorth(pane);
         display(pane);
         defp.add(pane);
+        east();
+    }
+
+    public void east() {
+        JButton b = new JButton("Play");
+        b.addActionListener(this);
+        pane.add(b, BorderLayout.EAST);
     }
 
     public void addCenter(JPanel pane) {
@@ -83,6 +95,9 @@ public class OtherFeatures extends DefaultScreen implements ActionListener{
             AdminMenu.main(args);
             pane.setVisible(false);
             this.dispose();
+        }
+        else if (command.equals("Play")) {
+            sp.start(stage);
         }
     }
 

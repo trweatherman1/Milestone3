@@ -3,45 +3,62 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//########################################################################################################
+
 /**
- * Created by Andrew on 4/3/14.
+ * @author Trent Weatherman
+ * @author Nicholas Widener
+ * @author Austin Richburg
+ * @author Jameson Burchette
+ *
+ * @version April 2015
+ *
+ * Creates Browse song screen
+ * extends the Default screen components
+ * and implements the ActionListener interface
+ * to handle button clicks
  */
-//######################################################################################################################
 public class BrowseSongs extends JFrame implements ActionListener, InputDialogView.InputDialogListener {
 
+    /**back button**/
     JButton back;
 
-    //JTextField jtf_search;
-
-
+    /**scroll area**/
     JScrollPane scrollArea;
+
+    /**panel for the list of songs**/
     JPanel directoryListing;
 
+    /**panel for the bottom of the screen**/
     JPanel southPanel;
 
+    /**Database controller**/
     Controller recordController;
 
     //==================================================================================================================
     /**
-     * A constructor for our TelephoneDirectory object.
+     * A constructor for BrowseSongs screen.
      */
     //==================================================================================================================
     public  BrowseSongs(){
         super();
-
+        //new instance of the database controller
         recordController = Controller.getInstance();
 
         this.setSize(800,600);
         this.setResizable(false);
         this.setTitle("Browse Songs");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // this.setResizable(false);
 
+        //set layout for the screen
         this.setLayout(new BorderLayout());
 
+        //center panel
         this.addCenterPanel();
+
+        //south panel
         this.addSouthPanel();
+
+        //north panel
         this.addNorthPanel();
 
 
@@ -49,51 +66,57 @@ public class BrowseSongs extends JFrame implements ActionListener, InputDialogVi
 
 
         redraw(true);
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
+
     /**
-     * Add's the center panel containing the list of telephone numbers;
+     * Adds the center panel that contains the list of songs
      */
-    //==================================================================================================================
     public void addCenterPanel(){
+        //new scroll area
         scrollArea = new JScrollPane();
+        //set size
         scrollArea.setPreferredSize(new Dimension(WIDTH, HEIGHT - 40));
+        //set color
         scrollArea.setBackground(Color.BLUE);
 
-
+        //panel for list
         directoryListing = new JPanel();
+        //set the layout
         directoryListing.setLayout(new BoxLayout(directoryListing, BoxLayout.Y_AXIS));
-
+        //scroll area with the songs list
         scrollArea = new JScrollPane(directoryListing);
         scrollArea.setPreferredSize(new Dimension(WIDTH, HEIGHT - 40));
-
-
-
+        //add to main borderlayout
         this.add(scrollArea, BorderLayout.CENTER);
 
-    }//=================================================================================================================
+    }
 
-    //==================================================================================================================
+
     /**
-     * Redraw the table of data.
-     * @boolean loadAll When true the table data is reloaded in its entirety.
+     * Redraw the list of songs
+     * @boolean loadAll When true the list is reloaded
      */
-    //==================================================================================================================
-    public void redraw(boolean loadAll){
 
-        directoryListing.removeAll();//Clear components.
+
+    public void redraw(boolean loadAll){
+        //clear
+        directoryListing.removeAll();
         if(loadAll)
             recordController.loadAll();
 
         for(int x = 0; x < recordController.records.size();  x++){
+            //new list of songs
             SongList d = new SongList(recordController.records.get(x));
             directoryListing.add(d);
-        }//end x
+        }
         directoryListing.revalidate();
         this.repaint();
-    }//=================================================================================================================
+    }
 
+    /**
+     * Adds the components to the top of the screen
+     */
     public void addNorthPanel(){
         JLabel songTitle = new JLabel("Song");
         JLabel artistName = new JLabel("Artist");
@@ -238,21 +261,6 @@ public class BrowseSongs extends JFrame implements ActionListener, InputDialogVi
             this.setVisible(false);
             dispose();
         }
-        /*
-        else if(cmp == update){
-            System.out.println("Update Selected");
-            updateSelected();
-        }
-
-        else if (command == deleteSong){
-            System.out.println("Del");
-            delRecord();
-        }
-        /*
-        else if(command == cmd_search){
-            String src = jtf_search.getText();
-            search(src);
-        }*/
     }//end action performed=============================================================================================
 
 

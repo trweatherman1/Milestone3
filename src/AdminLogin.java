@@ -3,8 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 /**
- * Created by Trent on 4/20/2015.
+ * @author Trent Weatherman
+ * @author Nicholas Widener
+ * @author Austin Richburg
+ * @author Jameson Burchette
+ *
+ * @version April 2015
+ *
+ * Creates Admin Login screen
+ * extends the Default screen components
+ * and implements the ActionListener interface
+ * to handle button clicks
  */
 public class AdminLogin extends DefaultScreen implements ActionListener {
 
@@ -67,12 +78,12 @@ public class AdminLogin extends DefaultScreen implements ActionListener {
      *
      * A setUpButtons method to setup the buttons to use in the GridBagLayout
      *
-     * @param con
-     * @param pane
-     * @param submit
-     * @param user
-     * @param password
-     * @param back
+     * @param con constraints for GridBagLayout
+     * @param pane the pane for the layout to appear
+     * @param submit submit button
+     * @param user username
+     * @param password password
+     * @param back back button
      */
     private void setupButtons(GridBagConstraints con, JPanel pane, JButton submit, JTextField user, JTextField password,
                                JButton back) {

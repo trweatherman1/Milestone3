@@ -4,7 +4,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * Created by Trent on 4/22/2015.
+ * @author Trent Weatherman
+ * @author Nicholas Widener
+ * @author Austin Richburg
+ * @author Jameson Burchette
+ *
+ * @version April 2015
+ *
+ * Creates the keyboard for JukeMeister
+ * Extends Default screen and implements the
+ * KeyListener interface so buttons can be clicked
  */
 public class NumberKeyboard extends JPanel implements KeyListener {
     String first[] = {"1", "2", "3"};
