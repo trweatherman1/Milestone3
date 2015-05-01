@@ -13,10 +13,10 @@ import java.util.Properties;
 //##########################################################################
 public class Controller {
 
-    /**The database will be embedded with the app (not on some remote server)**/
+    /**The database will be built into the program**/
     private String framework = "embedded";
 
-    /**The name of the JDBC Driver to use**/
+    /**The JDBC Driver to use**/
     private String driver = "org.apache.derby.jdbc.EmbeddedDriver";
 
     /**The connection protocol for the DB*/
@@ -25,16 +25,18 @@ public class Controller {
     /**The array list of records to store in the system.**/
     ArrayList<SongRecordModel> records;
 
-    String dbName = "derbyDB"; /**The name of the database**/
+    /**The name of the database in use **/
+    String database = "derbyDB";
 
-    Connection connect = null; /**The database connection **/
+    /**setting a Connection object connection to null**/
+    Connection connect = null;
 
     /**The singleton instance of the controller.**/
     private static Controller instance;
 
     //========================================================================
     /**
-     * A no argument constructor for the controller.
+     * A constructor for the Controller class
      */
     //========================================================================
     private Controller(){
@@ -51,7 +53,7 @@ public class Controller {
 
     /**
      * Get the singleton instance of this object.
-     * @return
+     * @return the instance of the singleton
      */
     //=========================================================================
     public static Controller getInstance(){
@@ -61,18 +63,18 @@ public class Controller {
     }//========================================================================
     //========================================================================
     /**
-     * Add a record r to the list and insert into the database.
-     * @param r The record to be inserted.
+     * Add a SongRecordModel record to the list and insert into the database.
+     * @param record The record to be inserted.
      */
     //========================================================================
-    public void addRecord(SongRecordModel r){
-        records.add(r);
-        this.insert(r);
+    public void addRecord(SongRecordModel record){
+        records.add(record);
+        this.insert(record);
     }//========================================================================
 
     //=========================================================================
     /**
-     * Add a record to the list and insert into the database.
+     * A different addRecord method that puts the song, artist, album and genre
      * @param song
      * @param artist
      * @param album
@@ -81,80 +83,62 @@ public class Controller {
     //=========================================================================
     public void addRecord(String song, String artist, String album, String genre){
         this.addRecord(new SongRecordModel(song, artist, album, genre));
-    }//========================================================================
+    }
 
-    //=========================================================================
+
     /**
      * Remove a record from the list and the database.
-     * @param r
+     * @param record
      */
-    //=========================================================================
-    public void removeRecord(SongRecordModel r){
-        records.remove(r);
+     public void removeRecord(SongRecordModel record){
+        records.remove(record);
 
-        this.remove(r);//remove from DB
+        //remove the record from the database
+        this.remove(record);
 
-    }//========================================================================
+    }
 
 
-    //=========================================================================
+
     /**
-     * Update the record stored in the parameter r.
-     * @param r
+     * Update the record stored in the SongRecordModel record.
+     * @param record
      */
-    //=========================================================================
-    public void updateRecord(SongRecordModel r){
-        this.update(r);
-    }//========================================================================
 
-    //=========================================================================
+    public void updateRecord(SongRecordModel record){
+        this.update(record);
+    }
+
     /**
-     * Loads the appropriate JDBC driver for this environment/framework. For
-     * example, if we are in an embedded environment, we load Derby's
-     * embedded Driver, <code>org.apache.derby.jdbc.EmbeddedDriver</code>.
+     * Loads the JDBC driver into this method.
      */
     //=========================================================================
     private void loadDriver() {
-        /*
-         *  The JDBC driver is loaded by loading its class.
-         *  If you are using JDBC 4.0 (Java SE 6) or newer, JDBC drivers may
-         *  be automatically loaded, making this code optional.
-         *
-         *  In an embedded environment, this will also start up the Derby
-         *  engine (though not any databases), since it is not already
-         *  running. In a client environment, the Derby engine is being run
-         *  by the network server framework.
-         *
-         *  In an embedded environment, any static Derby system properties
-         *  must be set before loading the driver to take effect.
-         */
-
-        //Try to connect to driver
+        //A try catch block to try to load the driver
         try {
             Class.forName(driver).newInstance();
             System.out.println("Loaded the appropriate driver");
         }
-        //Fail catches.
+        //the catches and exceptions thrown if the driver doesn't load.
         catch (ClassNotFoundException cnfe) {
-            System.err.println("\nUnable to load the JDBC driver " + driver);
-            System.err.println("Please check your CLASSPATH.");
+            System.err.println("Unable to load driver " + driver);
             cnfe.printStackTrace(System.err);
         } catch (InstantiationException ie) {
             System.err.println(
-                    "\nUnable to instantiate the JDBC driver " + driver);
+                    "Unable to instantiate driver " + driver);
             ie.printStackTrace(System.err);
         } catch (IllegalAccessException iae) {
             System.err.println(
-                    "\nNot allowed to access the JDBC driver " + driver);
+                    "Not allowed to access driver " + driver);
             iae.printStackTrace(System.err);
         }
-    }//========================================================================
+    }
 
 
-
-    //=========================================================================
     /**
-     * @return The connection or null.
+     * Connects to the database
+     * @return true if connected
+     * @return false if not connected
      */
     //=========================================================================
     public Connection connect() {
@@ -162,81 +146,70 @@ public class Controller {
         boolean state = false;
         loadDriver();
 
-        try{
-            // providing a user name and password is optional in the embedded
-            // and derbyclient frameworks
-            Properties props = new Properties(); // connection properties
-            //  props.put("user", "user1");
-            //  props.put("password", "user1");
+        try{//try to create a connection to the database
 
-            //Create connection
-            connect = DriverManager.getConnection(protocol + dbName + ";create=true", props);
+            Properties properties = new Properties();
 
-            System.out.println("Connected to and created database " + dbName);
+
+            //Create a connection to the database
+            connect = DriverManager.getConnection(protocol + database + ";create=true", properties);
+
+            System.out.println("Connected to and created database " + database);
             return connect;
-        }
+        }//catch exception thrown
         catch(SQLException ex){
             System.out.println("Error connecting to database");
         }
 
         return null;
-    }//=========================================================================
+    }
 
 
-    //==========================================================================
+
     /**
-     * Close the connection to the DB.
+     * Close the connection just made to the database.
      */
-    //==========================================================================
+
     public void closeDB(){
         if (framework.equals("embedded"))
         {
-            try
+            try//try to shut down the connection to the database
             {
-                // the shutdown=true attribute shuts down Derby
                 DriverManager.getConnection("jdbc:derby:;shutdown=true");
-
-                // To shut down a specific database only, but keep the
-                // engine running (for example for connecting to other
-                // databases), specify a database in the connection URL:
-                //DriverManager.getConnection("jdbc:derby:" + dbName + ";shutdown=true");
             }
+            //catch an exception being thrown
             catch (SQLException se)
             {
                 if (( (se.getErrorCode() == 50000)
                         && ("XJ015".equals(se.getSQLState()) ))) {
-                    // we got the expected exception
-                    System.out.println("Derby shut down normally");
-                    // Note that for single database shutdown, the expected
-                    // SQL state is "08006", and the error code is 45000.
+
+                    System.out.println("Shut down");
+
                 } else {
-                    // if the error code or SQLState is different, we have
-                    // an unexpected exception (shutdown failed)
-                    System.err.println("Derby did not shut down normally");
+
+                    System.err.println("Error shutting downy");
                     se.printStackTrace();
                 }
             }
 
             connect = null;
         }
-    }//==========================================================================
+    }
 
-    //===========================================================================
     /**
-     * Creates a table.
+     * Creates the table to put records into
      */
-    //===========================================================================
     public void createTable() {
-
+        /**if connect is null then call the connect method**/
         if (connect == null)
             connect();
 
-        try{
+        try{//try to connect to the table
 
-            //Generate statement object to use.
+
             Statement statement = connect.createStatement();
 
-            //Use the create syntax to create a table.
+            //Create a table using the create syntax
 
             statement.execute("CREATE TABLE songDirectory ( "
                     + " id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),"
@@ -245,138 +218,149 @@ public class Controller {
                     + " album VARCHAR(100) NOT NULL, "
                     + " genre VARCHAR(100) NOT NULL)");
 
-
+            //commit to connect
             connect.commit();
+
             System.out.println("Created table location");
         }
+        //catch exception thrown
         catch(SQLException ex){
 
-            System.out.println("Error creating table:" + ex.getMessage());
+            System.out.println("Could not create table: " + ex.getMessage());
         }
+        //finally call the closeDB() method
         finally{
             closeDB();
         }
-    }//==========================================================================
+    }
 
-    //==========================================================================
     /**
      * Inserts the selected record into the database if possible.
-     * @param tr
+     * @param record
      */
-    //==========================================================================
-    private void insert(SongRecordModel tr) {
+
+    private void insert(SongRecordModel record) {
 
         if (connect == null)
             connect();
 
         try
         {
-            PreparedStatement psInsert;
-            psInsert= connect.prepareStatement(  "insert into songDirectory(song, artist, album, genre) values ( ?, ?, ?, ?)");
+            PreparedStatement insert;
+            //inserting into the songDirectory table
+            insert= connect.prepareStatement(  "insert into songDirectory(song, artist, album, genre) values ( ?, ?, ?, ?)");
 
-            psInsert.setString(1, tr.getSong());
-            psInsert.setString(2, tr.getArtist());
-            psInsert.setString(3, tr.getAlbum());
-            psInsert.setString(4, tr.getGenre());
-            
-            psInsert.executeUpdate();
+            //set the string of the first position to a song
+            insert.setString(1, record.getSong());
+
+            //set the string of the second position to an artist
+            insert.setString(2, record.getArtist());
+
+            //set the string of the third position to an album
+            insert.setString(3, record.getAlbum());
+
+            //set the string of the fourth position to a genre
+            insert.setString(4, record.getGenre());
+
+            //update after insert
+            insert.executeUpdate();
 
             connect.commit();
             System.out.println("Record inserted");
 
         }
         catch(SQLException ex){
-            System.out.println("Error inserting: " + ex.getMessage());
+            System.out.println("Record not inserted: " + ex.getMessage());
         }
         finally{
             closeDB();
         }
 
-    }//==========================================================================
+    }
 
 
 
-    //==========================================================================
+
     /**
-     * Inserts the selected record into the database if possible.
-     * @param tr
+     * Inserts a selected record into the database
+     * @param record
      */
-    //==========================================================================
-    private void update(SongRecordModel tr) {
+
+    private void update(SongRecordModel record) {
 
         if (connect == null)
             connect();
 
         try{
-            PreparedStatement psUpdate;
-            psUpdate = connect.prepareStatement(  "UPDATE songDirectory SET song=?,  artist=?, album=?, genre=?");
+            PreparedStatement update;
+            update = connect.prepareStatement(  "UPDATE songDirectory SET song=?,  artist=?, album=?, genre=?");
 
 
+            //update the string of the first position to a song
+            update.setString(1, record.getSong());
 
-            psUpdate.setString(1, tr.getSong());
-            psUpdate.setString(2, tr.getArtist());
-            psUpdate.setString(3, tr.getAlbum());
-            psUpdate.setString(4, tr.getGenre());
+            //update the string of the second position to an artist
+            update.setString(2, record.getArtist());
 
+            //update the string of the third position to an album
+            update.setString(3, record.getAlbum());
 
+            //update the string of the fourth position to a genre
+            update.setString(4, record.getGenre());
 
-            //psUpdate.setTimestamp(7, Timestamp.valueOf(tr.getDate()))  ;
-            psUpdate.executeUpdate();
+            update.executeUpdate();
 
             connect.commit();
             System.out.println("Record updated");
         }
         catch(SQLException ex){
-            System.out.println("Error updating record: " + ex.getMessage() + " ::" );
+            System.out.println("Song Directory did not update record: " + ex.getMessage() );
         }
         finally{
             closeDB();
         }
+    }
 
 
-    }//==========================================================================
-
-    //===========================================================================
     /**
      * Remove a record from the database.
      * @param file
      */
-    //===========================================================================
+
     private void remove(SongRecordModel file){
 
         if (connect == null )
             connect();
 
         try{
-            Statement sta =connect.createStatement();
-            PreparedStatement psUpdate;
-            psUpdate = connect.prepareStatement(  "DELETE FROM songDirectory WHERE song = \'Love Somebody\'" );
-            psUpdate.executeUpdate();
+            PreparedStatement update;
+            update = connect.prepareStatement(  "DELETE FROM songDirectory WHERE song = \'Love Somebody\'" );
+            update.executeUpdate();
             connect.commit();
             System.out.println("Record removed:");
         }
         catch(SQLException ex){
-            System.out.println("Error removing record:" + ex.getMessage());
+            System.out.println("Problem removing record:" + ex.getMessage());
         }
         finally{
             closeDB();
         }
 
-    }//=========================================================================
+    }
 
-    //===========================================================================
+
     /**
-     * Remove a record from the database.
+     * Start the table completely over
      */
-    //===========================================================================
+
     public void dropTable(){
 
         if (connect == null)
             connect();
 
         try{
-            //Generate statement object to use.
-            Statement statement =connect.createStatement();
+
+            Statement statement = connect.createStatement();
             statement.execute("drop table location");
 
 
@@ -389,25 +373,23 @@ public class Controller {
         finally{
             closeDB();
         }
+    }
 
-    }//=========================================================================
-
-    //==========================================================================
     /**
-     * Reload all records in the database.
+     * Load all the records into the table
      */
-    //==========================================================================
+
     public void loadAll(){
         selectAll(true);
-    }//=========================================================================
+    }
 
-    //===========================================================================
+
     /**
-     * Gets all the records in the database
-     * @param clear If true selected records replace existing.
-     * @return An ArrayList containing the items.
+     * Get all the records in the database
+     * @param clear if clear() clear all the records
+     * @return An ArrayList that holds SongRecordModel items
      */
-    //===========================================================================
+
     private ArrayList<SongRecordModel> selectAll(boolean clear) {
 
         if (connect == null)
@@ -415,10 +397,10 @@ public class Controller {
 
         ResultSet rs = null;
         try{
-            //Generate statement object to use.
+
             Statement statement =connect.createStatement();
 	   	
-		   /*We select the rows and verify the results. */
+
             rs = statement.executeQuery( "SELECT * FROM songDirectory ORDER BY song");
 
             if (clear) records.clear();
@@ -442,17 +424,17 @@ public class Controller {
         }
 
         return records;
-    }//=========================================================================
+    }
 
 
-    //===========================================================================
+
     /**
      * Gets all the records in the database
      * @param
      * @param clear When true results will replace rather than be added to existing.
      * @return An ArrayList containing the items.
      */
-    //===========================================================================
+
     private ArrayList<SongRecordModel> select(String where, boolean clear) {
 
         if (connect == null)
@@ -460,10 +442,10 @@ public class Controller {
 
         ResultSet rs = null;
         try{
-            //Generate statement object to use.
+
             Statement s =connect.createStatement();
 	   	
-		   /*We select the rows and verify the results. */
+
             rs = s.executeQuery( "SELECT * FROM songDirectory ORDER BY artist WHERE " + where);
 
 
@@ -512,10 +494,10 @@ public class Controller {
 
         ResultSet rs = null;
         try{
-            //Generate statement object to use.
+
             Statement statement =connect.createStatement();
 	   	
-		   /*We select the rows and verify the results. */
+
             rs = statement.executeQuery( query);
 
             if (clear) records.clear();
@@ -540,7 +522,5 @@ public class Controller {
         }
 
         return records;
-    }//=========================================================================
-
-
-}//############################################################################
+    }
+}
